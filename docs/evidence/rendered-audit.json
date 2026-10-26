@@ -1,0 +1,940 @@
+[
+  {
+    "url": "https://esteticars-monteros.vercel.app/",
+    "title": "EstetiCARS Monteros",
+    "headings": [
+      {
+        "level": "H1",
+        "text": "La Pasión por los Detalles se Refleja en tu Vehículo"
+      },
+      {
+        "level": "H2",
+        "text": "Nuestra Historia"
+      },
+      {
+        "level": "H2",
+        "text": "Qué Hacemos"
+      },
+      {
+        "level": "H3",
+        "text": "Soldaduras Plásticas"
+      },
+      {
+        "level": "H3",
+        "text": "Tratamientos de Protección"
+      },
+      {
+        "level": "H3",
+        "text": "Pulido y Restauración"
+      },
+      {
+        "level": "H3",
+        "text": "Limpieza Profesional"
+      },
+      {
+        "level": "H2",
+        "text": "Transformaciones Reales"
+      },
+      {
+        "level": "H2",
+        "text": "Contactanos"
+      }
+    ],
+    "links": [
+      {
+        "text": " Pedir Cotización por WhatsApp",
+        "href": "https://wa.me/3863511080"
+      },
+      {
+        "text": "WhatsApp",
+        "href": "https://wa.me/3863511080"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/esteticarsmonteros2020/"
+      }
+    ],
+    "images": [
+      {
+        "src": "",
+        "alt": "Esteticars Monteros Logo",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Equipo trabajando",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Antes y después 1",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Antes y después 2",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Antes y después 3",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Antes y después 4",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Antes y después 5",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Antes y después 6",
+        "loading": "auto",
+        "width": 0
+      },
+      {
+        "src": "",
+        "alt": "Esteticars Monteros Logo",
+        "loading": "auto",
+        "width": 0
+      }
+    ],
+    "text": "Inicio\nNosotros\nServicios\nGaleria\nContacto\nLa Pasión por los Detalles se Refleja en tu Vehículo\n\nExpertos en estética vehicular y reparación de plásticos en Monteros.\n\nPedir Cotización por WhatsApp\nNuestra Historia\n\nEsteticars Monteros nació en 2020 de la pasión por los autos y el perfeccionismo. Lo que comenzó como un hobby, hoy es un taller dedicado a devolverle el brillo y la vida a cada vehículo que pasa por nuestras manos. Combinamos técnicas artesanales con la mejor tecnología para garantizar resultados que superan las expectativas. Ubicados en Monteros - Tucumán, somos tu mejor opción para el cuidado y restauración de tu vehículo.\n\nQué Hacemos\nSoldaduras Plásticas\n\nEspecialistas en reparación de PARAGOLPES, AUTOPARTES y CACHAS DE MOTO. Soluciones profesionales y duraderas.\n\nTratamientos de Protección\n\nTRATAMIENTOS CERÁMICOS, ACRÍLICOS y de VIDRIO LÍQUIDO para una protección superior.\n\nPulido y Restauración\n\nPULIDO VEHICULAR profesional, ABRILLANTADO y RESTAURACIÓN DE ÓPTICAS.\n\nLimpieza Profesional\n\nLIMPIEZA DE INTERIOR, TAPIZADOS y MOTOR. Servicio detallado y profesional.\n\nTransformaciones Reales\n\nVer Antes y Después\n\nVer Antes y Después\n\nVer Antes y Después\n\nVer Antes y Después\n\nVer Antes y Después\n\nVer Antes y Después\n\nContactanos\nWhatsApp\nInstagram\nMonteros, Tucumán, Argentina\n\n© 2025 Esteticars Monteros - Todos los derechos reservados.",
+    "resources": [
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap",
+        "bytes": 1891,
+        "duration": 182.7999999988824
+      },
+      {
+        "name": "https://esteticars-monteros.vercel.app/assets/index-9ff42766.css",
+        "bytes": 2471,
+        "duration": 71.5
+      },
+      {
+        "name": "https://esteticars-monteros.vercel.app/assets/index-9ec9bfc7.js",
+        "bytes": 90182,
+        "duration": 100.20000000111759
+      },
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap",
+        "bytes": 914,
+        "duration": 106.80000000074506
+      },
+      {
+        "name": "https://esteticars-monteros.vercel.app/assets/favicon-9c999182.png",
+        "bytes": 313020,
+        "duration": 91
+      }
+    ],
+    "vue": false,
+    "react": true
+  },
+  {
+    "url": "https://donenriqueweb.netlify.app/",
+    "title": "Don Enrique - Beer & Food | Cerveza Artesanal y Pizzería",
+    "headings": [
+      {
+        "level": "H1",
+        "text": "Don Enrique Beer & Food"
+      },
+      {
+        "level": "H2",
+        "text": "Pizzeria - Cervecería"
+      },
+      {
+        "level": "H3",
+        "text": "Nuestra Carta Destacada"
+      },
+      {
+        "level": "H3",
+        "text": "Napolitana Americana"
+      },
+      {
+        "level": "H3",
+        "text": "Mexicano"
+      },
+      {
+        "level": "H3",
+        "text": "Pizza Don Enrique"
+      },
+      {
+        "level": "H3",
+        "text": "Nuestra Historia"
+      },
+      {
+        "level": "H3",
+        "text": "Conocé Nuestro Menú"
+      }
+    ],
+    "links": [
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "Inicio",
+        "href": "/"
+      },
+      {
+        "text": "Nosotros",
+        "href": "/nosotros"
+      },
+      {
+        "text": "Nuestra Carta",
+        "href": "/nuestra-carta"
+      },
+      {
+        "text": "Contacto",
+        "href": "/contacto"
+      },
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "Conocé nuestra carta",
+        "href": "/nuestra-carta"
+      },
+      {
+        "text": "Conocé más",
+        "href": "/nosotros"
+      },
+      {
+        "text": "Ver la carta",
+        "href": "/nuestra-carta"
+      },
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "3863 - 534208",
+        "href": "tel:+5493863534208"
+      },
+      {
+        "text": "",
+        "href": "http://api.whatsapp.com/send?phone=3863534208"
+      },
+      {
+        "text": "",
+        "href": "https://www.facebook.com/people/Don-Enrique-Beer-food/100063241178163"
+      },
+      {
+        "text": "",
+        "href": "https://www.instagram.com/don_enrique_beer/?hl=es"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/logo-letra-BqO7ZnuS.png",
+        "alt": "Logo Don Enrique",
+        "loading": "auto",
+        "width": 1000
+      },
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/logo-DMZkvyDt.png",
+        "alt": "logo del sitio",
+        "loading": "lazy",
+        "width": 1000
+      },
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/comida_index-DoiyhGVm.jpeg",
+        "alt": "Napolitana",
+        "loading": "lazy",
+        "width": 1280
+      },
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/comida_index2-uRmes25t.jpeg",
+        "alt": "Papasdone",
+        "loading": "lazy",
+        "width": 960
+      },
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/comida_index3-B1m8pWip.jpeg",
+        "alt": "Pizzadone",
+        "loading": "lazy",
+        "width": 1280
+      },
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/Nosotros%20-%201-Be0E2W-X.jpg",
+        "alt": "Foto del restaurante",
+        "loading": "lazy",
+        "width": 4000
+      },
+      {
+        "src": "https://donenriqueweb.netlify.app/assets/logo-letra-BqO7ZnuS.png",
+        "alt": "Logo Don Enrique",
+        "loading": "auto",
+        "width": 1000
+      }
+    ],
+    "text": "INICIO\nNOSOTROS\nNUESTRA CARTA\nCONTACTO\nSwitch to light mode\nSwitch language\nES\nDON ENRIQUE BEER & FOOD\nPIZZERIA - CERVECERÍA\nCONOCÉ NUESTRA CARTA\nNUESTRA CARTA DESTACADA\nNAPOLITANA AMERICANA\nMEXICANO\nPIZZA DON ENRIQUE\nNUESTRA HISTORIA\n\nDon Enrique es un lugar donde la buena comida y la buena atención se unen. Nacimos de la pasión por la gastronomía y el deseo de crear un ambiente acogedor para disfrutar con amigos y familia.\n\nCONOCÉ MÁS\nCONOCÉ NUESTRO MENÚ\n\nDesde pizzas artesanales hasta hamburguesas gourmet, tenemos algo para todos los gustos.\n\nVER LA CARTA\n3863 - 534208\n\n© 2026 Don Enrique - Beer & Food. Todos los derechos reservados.",
+    "resources": [
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Rakkas&family=Lato:wght@400;700&display=swap",
+        "bytes": 1010,
+        "duration": 173.09999999962747
+      },
+      {
+        "name": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+        "bytes": 13683,
+        "duration": 118.39999999850988
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/index-BUpUHup9.js",
+        "bytes": 65190,
+        "duration": 360.69999999925494
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/index-DUaXUJrf.css",
+        "bytes": 6528,
+        "duration": 211.59999999962747
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/logo-letra-BqO7ZnuS.png",
+        "bytes": 134327,
+        "duration": 910.5999999996275
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/fondo-home-B8p0rAAb.jpeg",
+        "bytes": 102832,
+        "duration": 725.5999999996275
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/logo-DMZkvyDt.png",
+        "bytes": 216380,
+        "duration": 654.5
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/comida_index2-uRmes25t.jpeg",
+        "bytes": 140734,
+        "duration": 654.3000000007451
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/Nosotros%20-%201-Be0E2W-X.jpg",
+        "bytes": 2695289,
+        "duration": 815.5
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/comida_index3-B1m8pWip.jpeg",
+        "bytes": 158415,
+        "duration": 885.9000000003725
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/comida_index-DoiyhGVm.jpeg",
+        "bytes": 207154,
+        "duration": 1021.2000000011176
+      },
+      {
+        "name": "https://donenriqueweb.netlify.app/assets/favicon-daqYatLx.png",
+        "bytes": 50340,
+        "duration": 208.40000000037253
+      }
+    ],
+    "vue": true,
+    "react": false
+  },
+  {
+    "url": "https://traidoresno.vercel.app/",
+    "title": "Traidores NO - Rock Alternativo",
+    "headings": [
+      {
+        "level": "H2",
+        "text": "En Memoria"
+      },
+      {
+        "level": "H3",
+        "text": "Ulises Espinoza"
+      },
+      {
+        "level": "H2",
+        "text": "PRÓXIMOS SHOWS"
+      },
+      {
+        "level": "H3",
+        "text": "TEATRO GRAN REX"
+      },
+      {
+        "level": "H3",
+        "text": "QUALITY ESPACIO"
+      },
+      {
+        "level": "H3",
+        "text": "BROADWAY LIVE"
+      },
+      {
+        "level": "H2",
+        "text": "ÚLTIMAS NOTICIAS"
+      },
+      {
+        "level": "H3",
+        "text": "Nuevo Álbum en Camino"
+      },
+      {
+        "level": "H3",
+        "text": "Gira Nacional 2025"
+      },
+      {
+        "level": "H3",
+        "text": "Colaboración con Artista Internacional"
+      },
+      {
+        "level": "H3",
+        "text": "Video Nuevo: \"Resistir\""
+      },
+      {
+        "level": "H2",
+        "text": "PRÓXIMO LANZAMIENTO"
+      },
+      {
+        "level": "H2",
+        "text": "DISCOGRAFÍA"
+      },
+      {
+        "level": "H3",
+        "text": "Sueños de Desvelos"
+      },
+      {
+        "level": "H3",
+        "text": "Presagio"
+      },
+      {
+        "level": "H2",
+        "text": "VIDEOS MUSICALES"
+      },
+      {
+        "level": "H3",
+        "text": "Lo mejor que pueda"
+      },
+      {
+        "level": "H3",
+        "text": "Este infierno"
+      },
+      {
+        "level": "H3",
+        "text": "Perdido en la noche"
+      },
+      {
+        "level": "H3",
+        "text": "Maldita Ansiedad"
+      },
+      {
+        "level": "H3",
+        "text": "Volar"
+      },
+      {
+        "level": "H3",
+        "text": "Valenfina"
+      },
+      {
+        "level": "H2",
+        "text": "LA BANDA"
+      },
+      {
+        "level": "H3",
+        "text": "Martin Diaz"
+      },
+      {
+        "level": "H3",
+        "text": "Alvaro \"Piojo\" Acosta"
+      },
+      {
+        "level": "H3",
+        "text": "Mario Gramajo"
+      },
+      {
+        "level": "H3",
+        "text": "Jose Barrionuevo"
+      },
+      {
+        "level": "H3",
+        "text": "Pedro Barrionuevo"
+      },
+      {
+        "level": "H2",
+        "text": "GALERÍA"
+      },
+      {
+        "level": "H2",
+        "text": "NUESTRA HISTORIA"
+      },
+      {
+        "level": "H3",
+        "text": "Lo que dicen de nosotros"
+      },
+      {
+        "level": "H2",
+        "text": "TIENDA OFICIAL"
+      },
+      {
+        "level": "H3",
+        "text": "Remera Logo Clásico"
+      },
+      {
+        "level": "H3",
+        "text": "Hoodie Sueños de Desvelos"
+      },
+      {
+        "level": "H3",
+        "text": "CD Presagio"
+      },
+      {
+        "level": "H3",
+        "text": "Vinilo Sueños de Desvelos"
+      },
+      {
+        "level": "H3",
+        "text": "Gorra Bordada"
+      },
+      {
+        "level": "H3",
+        "text": "Poster Tour 2025"
+      },
+      {
+        "level": "H2",
+        "text": "UNITE A NUESTRA COMUNIDAD"
+      },
+      {
+        "level": "H2",
+        "text": "CONTACTO"
+      },
+      {
+        "level": "H3",
+        "text": "¡DEJANOS TU MENSAJE!"
+      },
+      {
+        "level": "H3",
+        "text": "TRAIDORES NO."
+      }
+    ],
+    "links": [
+      {
+        "text": "Inicio",
+        "href": null
+      },
+      {
+        "text": "Conciertos",
+        "href": null
+      },
+      {
+        "text": "Noticias",
+        "href": null
+      },
+      {
+        "text": "Discografía",
+        "href": null
+      },
+      {
+        "text": "Videos",
+        "href": null
+      },
+      {
+        "text": "La Banda",
+        "href": null
+      },
+      {
+        "text": "Galería",
+        "href": null
+      },
+      {
+        "text": "Historia",
+        "href": null
+      },
+      {
+        "text": "Tienda",
+        "href": null
+      },
+      {
+        "text": "Contacto",
+        "href": null
+      },
+      {
+        "text": " ESCÚCHANOS",
+        "href": "https://youtube.com"
+      },
+      {
+        "text": "",
+        "href": "https://facebook.com"
+      },
+      {
+        "text": "",
+        "href": "https://instagram.com"
+      },
+      {
+        "text": "",
+        "href": "https://youtube.com"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto3-Cbyz00gY.jpg",
+        "alt": "Banda en vivo",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto2-B2Xt3DeD.jpg",
+        "alt": "Concierto",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/ulises-espinoza-CxnvKtCH.jpg",
+        "alt": "Ulises Espinoza",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/presagio-D1qcvm2m.jpg",
+        "alt": "Nuevo Álbum en Camino",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto6-7Q1TxQdF.jpg",
+        "alt": "Gira Nacional 2025",
+        "loading": "auto",
+        "width": 959
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto3-Cbyz00gY.jpg",
+        "alt": "Colaboración con Artista Internacional",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto5-COgjZlTe.jpg",
+        "alt": "Video Nuevo: \"Resistir\"",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/suenos-desvelos-BQ3SNVrD.jpg",
+        "alt": "Sueños de Desvelos",
+        "loading": "auto",
+        "width": 225
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/presagio-D1qcvm2m.jpg",
+        "alt": "Presagio",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/despertar-thumb-BqnZG9cR.jpg",
+        "alt": "Lo mejor que pueda",
+        "loading": "auto",
+        "width": 905
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/calles-vacias-thumb-CMMuXOc4.jpg",
+        "alt": "Este infierno",
+        "loading": "auto",
+        "width": 1105
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/tormenta-thumb-DX10TO-k.jpg",
+        "alt": "Perdido en la noche",
+        "loading": "auto",
+        "width": 879
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/resistir-thumb-4Z0v9791.jpg",
+        "alt": "Maldita Ansiedad",
+        "loading": "auto",
+        "width": 1118
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/en-vivo-thumb-1Uc0oRoz.jpg",
+        "alt": "Volar",
+        "loading": "auto",
+        "width": 1128
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/sesion-acustica-thumb-Ceq6CqMg.jpg",
+        "alt": "Valenfina",
+        "loading": "auto",
+        "width": 1162
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/martin-CGf7KPEj.jpg",
+        "alt": "Martin Diaz",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/piojo-Bipz65w6.jpg",
+        "alt": "Alvaro \"Piojo\" Acosta",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/mario-BTPVNLm9.jpg",
+        "alt": "Mario Gramajo",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/jose-CLjfOtmx.jpg",
+        "alt": "Jose Barrionuevo",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/pedro-pyZ_npbF.jpg",
+        "alt": "Pedro Barrionuevo",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto1-B_NzsPOB.jpg",
+        "alt": "Banda en concierto 1",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto2-B2Xt3DeD.jpg",
+        "alt": "Banda en concierto 2",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto3-Cbyz00gY.jpg",
+        "alt": "Banda en concierto 3",
+        "loading": "auto",
+        "width": 1080
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto4-Dm8-s6-T.jpg",
+        "alt": "Banda en concierto 4",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto5-COgjZlTe.jpg",
+        "alt": "Banda en concierto 5",
+        "loading": "auto",
+        "width": 1079
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/foto6-7Q1TxQdF.jpg",
+        "alt": "Banda en concierto 6",
+        "loading": "auto",
+        "width": 959
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/remera-logo-BoZlF0iS.jpg",
+        "alt": "Remera Logo Clásico",
+        "loading": "auto",
+        "width": 554
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/hoodie-suenos-DEC4StiD.jpg",
+        "alt": "Hoodie Sueños de Desvelos",
+        "loading": "auto",
+        "width": 555
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/cd-presagio-6nzwxm--.jpg",
+        "alt": "CD Presagio",
+        "loading": "auto",
+        "width": 1044
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/vinilo-suenos-D3y65a2M.jpg",
+        "alt": "Vinilo Sueños de Desvelos",
+        "loading": "auto",
+        "width": 210
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/gorra-BWTK3Toy.jpg",
+        "alt": "Gorra Bordada",
+        "loading": "auto",
+        "width": 773
+      },
+      {
+        "src": "https://traidoresno.vercel.app/assets/poster-tour-CTkggELg.jpg",
+        "alt": "Poster Tour 2025",
+        "loading": "auto",
+        "width": 209
+      }
+    ],
+    "text": "TRAIDORES NO.\nInicio\nConciertos\nNoticias\nDiscografía\nVideos\nLa Banda\nGalería\nHistoria\nTienda\nContacto\nESCÚCHANOS\nEN MEMORIA\nUlises Espinoza\n\n04 de Noviembre, 2025\n\nCon un nudo en la garganta y un dolor inmenso, despedimos a nuestro hermano del alma, Ulises Espinoza.\n\nSe fue de gira el \"Gordito\" que todos quieren, el amigo del que nadie jamás habló mal, un tipazo que siempre estaba dispuesto para alegrar el día a cualquiera con sus bromas permanentes. Hijo, hermano, padre y amigo del alma.\n\nDurante el tiempo que compartimos juntos, Ulises fue mucho más que nuestro manager: fue el pilar que sostuvo cada sueño, cada proyecto, cada paso que dimos como banda. Su pasión por la música, su dedicación incansable y su amor por el rock fueron la fuerza que nos impulsó a seguir adelante en los momentos más difíciles.\n\nFomentó la cultura del rock durante toda su vida, no solo con palabras, sino con acciones. Nos enseñó que la música se produce con la mente, pero se disfruta con el corazón. Esa frase, que tanto repetía, se convirtió en nuestro lema y seguirá guiando nuestro camino.\n\n\"Se produce con la mente, se disfruta con el corazón\"\n\n— Ulises Espinoza\n\nNo te vamos a olvidar nunca, hermano. Tu recuerdo vivirá en cada acorde, en cada show, en cada momento que compartamos con nuestra música. Gracias por creer en nosotros, por impulsarnos, por ser nuestro guía.\n\nHasta siempre, Ulises.\nDescansa en paz.\n\nSu legado permanecerá por siempre en nuestros corazones y en la música que creamos.\n\nPRÓXIMOS SHOWS\n15\nNOV\nVIERNES\nTEATRO GRAN REX\n\nBuenos Aires\n\n21:00 HS\n\nCONSEGUIR ENTRADAS\n23\nNOV\nSÁBADO\nQUALITY ESPACIO\n\nCórdoba\n\n22:00 HS\n\nCONSEGUIR ENTRADAS\n07\nDIC\nSÁBADO\nBROADWAY LIVE\n\nRosario\n\n21:30 HS\n\nCONSEGUIR ENTRADAS\nÚLTIMAS NOTICIAS\nLANZAMIENTOS\n19 de octubre de 2025\nNuevo Álbum en Camino\n\nLa banda confirma que están trabajando en su tercer álbum de estudio, con lanzamiento previsto para 2026.\n\nLeer más\nCONCIERTOS\n14 de octubre de 2025\nGira Nacional 2025\n\nSe anuncian 15 fechas por todo el país, incluyendo ciudades que nunca habían visitado.\n\nLeer más\nCOLABORACIONES\n9 de octubre de 2025\nColaboración con Artista Internacional\n\nConfirman colaboración sorpresa con una banda referente del rock alternativo mundial.\n\nLeer más\nVIDEOS\n4 de octubre de 2025\nVideo Nuevo: \"Resistir\"\n\nEstrenan el videoclip oficial de \"Resistir\", dirigido por Nahuel Lerena.\n\nLeer más\nPRÓXIMO LANZAMIENTO\n\nNuevo Álbum · Marzo 2026\n\n0\nDÍAS\n:\n0\nHORAS\n:\n0\nMINUTOS\n:\n0\nSEGUNDOS\nFecha de Lanzamiento\n\n15 de Marzo, 2026\n\n12 Canciones\n\nUna nueva experiencia sonora\n\nPre-Save\n\nDisponible próximamente\n\nNOTIFICARME DEL LANZAMIENTO\nDISCOGRAFÍA\nSueños de Desvelos\n\n2019\n\nPrimer álbum de la banda. Una exploración cruda de la realidad urbana.\n\nVer Canciones\nPresagio\n\n2022\n\nSegundo álbum que profundiza en la esencia del rock alternativo.\n\nVer Canciones\nVIDEOS MUSICALES\n145K\nLo mejor que pueda\n\nSueños de Desvelos\n\n2019\n\n98K\nEste infierno\n\nSueños de Desvelos\n\n2020\n\n203K\nPerdido en la noche\n\nPresagio\n\n2018\n\n167K\nMaldita Ansiedad\n\nPresagio\n\n2023\n\n89K\nVolar\n\nLive Session\n\n2024\n\n76K\nValenfina\n\nEspecial\n\n2024\n\nLA BANDA\nMartin Diaz\n\nVoz Principal\n\nAlvaro \"Piojo\" Acosta\n\nGuitarra Principal\n\nMario Gramajo\n\nGuitarra Secundaria\n\nJose Barrionuevo\n\nBajo\n\nPedro Barrionuevo\n\nBatería\n\nGALERÍA\nNUESTRA HISTORIA\n\nTraidores NO nace en 2017 en el underground porteño, con la misión de crear un sonido que fusione la crudeza del rock alternativo con letras que reflejan la realidad social contemporánea.\n\nFormada por músicos experimentados de la escena independiente, la banda rápidamente se ganó el reconocimiento por sus enérgicas presentaciones en vivo y su compromiso con la autenticidad musical.\n\nCon dos álbumes de estudio y decenas de shows en las principales salas del país, Traidores NO continúa su camino consolidándose como una de las propuestas más interesantes del rock argentino actual.\n\nLo que dicen de nosotros\n\n\"Una banda que redefine el rock alternativo argentino con su sonido único y letras profundas.\"\n\n— Rock Magazine\n\n\"Traidores NO trae la energía que el rock necesitaba. Imperdibles en vivo.\"\n\n— La Nación\n\n\"Su último álbum es una obra maestra del género. Cada canción cuenta una historia.\"\n\n— Rolling Stone Argentina\n\nTIENDA OFICIAL\nRemeras\nRemera Logo Clásico\n\n$8.500\n\nS\nM\nL\nXL\nAGREGAR AL CARRITO\nBuzos\nHoodie Sueños de Desvelos\n\n$15.000\n\nS\nM\nL\nXL\nAGREGAR AL CARRITO\nMúsica\nCD Presagio\n\n$3.500\n\nAGREGAR AL CARRITO\nMúsica\nVinilo Sueños de Desvelos\n\n$12.000\n\nAGREGAR AL CARRITO\nAccesorios\nGorra Bordada\n\n$6.000\n\nAGREGAR AL CARRITO\nAccesorios\nPoster Tour 2025\n\n$2.500\n\nAGREGAR AL CARRITO\nUNITE A NUESTRA COMUNIDAD\n\nSuscribite a nuestro newsletter y recibí las últimas noticias, fechas de conciertos exclusivas, y contenido especial antes que nadie.\n\nSUSCRIBIRME\n\nNo spam. Solo rock. Prometido. 🤘\n\nCONTACTO\n¡DEJANOS TU MENSAJE!\nEmail\n\ncontacto@traidoresno.com\n\nTeléfono\n\n+54 11 1234-5678\n\nManagement\n\nLa Calandria Producciones\n\nENVIAR\nTRAIDORES NO.\n\nRock Alternativo Argentino\n\n\"La música que no traiciona\"\n\nSeguinos\nContacto\n\ncontacto@traidoresno.com\n\nManagement: La Calandria\n\n+54 11 1234-5678\n\n© 2025 TRAIDORES NO. Todos los derechos reservados.\n\nDiseñado con ♥ para el rock argentino",
+    "resources": [
+      {
+        "name": "https://traidoresno.vercel.app/assets/index-oHSRzoEk.js",
+        "bytes": 75191,
+        "duration": 92
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/index-CkC7oOKC.css",
+        "bytes": 10295,
+        "duration": 92.5
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/foto3-Cbyz00gY.jpg",
+        "bytes": 74105,
+        "duration": 57.100000001490116
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/foto2-B2Xt3DeD.jpg",
+        "bytes": 48586,
+        "duration": 130.09999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/presagio-D1qcvm2m.jpg",
+        "bytes": 161689,
+        "duration": 124.69999999925494
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/ulises-espinoza-CxnvKtCH.jpg",
+        "bytes": 84615,
+        "duration": 136
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/foto6-7Q1TxQdF.jpg",
+        "bytes": 75527,
+        "duration": 172.7999999988824
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/despertar-thumb-BqnZG9cR.jpg",
+        "bytes": 539284,
+        "duration": 108.09999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/suenos-desvelos-BQ3SNVrD.jpg",
+        "bytes": 18640,
+        "duration": 108.69999999925494
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/foto5-COgjZlTe.jpg",
+        "bytes": 64396,
+        "duration": 137.09999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/calles-vacias-thumb-CMMuXOc4.jpg",
+        "bytes": 363615,
+        "duration": 177.80000000074506
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/resistir-thumb-4Z0v9791.jpg",
+        "bytes": 561046,
+        "duration": 171.59999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/en-vivo-thumb-1Uc0oRoz.jpg",
+        "bytes": 491502,
+        "duration": 186.40000000037253
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/tormenta-thumb-DX10TO-k.jpg",
+        "bytes": 556477,
+        "duration": 186.90000000037253
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/sesion-acustica-thumb-Ceq6CqMg.jpg",
+        "bytes": 122093,
+        "duration": 177
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/piojo-Bipz65w6.jpg",
+        "bytes": 60053,
+        "duration": 135.5
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/martin-CGf7KPEj.jpg",
+        "bytes": 48385,
+        "duration": 154
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/mario-BTPVNLm9.jpg",
+        "bytes": 44688,
+        "duration": 179.19999999925494
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/jose-CLjfOtmx.jpg",
+        "bytes": 143079,
+        "duration": 182.19999999925494
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/pedro-pyZ_npbF.jpg",
+        "bytes": 50544,
+        "duration": 156.09999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/foto1-B_NzsPOB.jpg",
+        "bytes": 110705,
+        "duration": 165.59999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/foto4-Dm8-s6-T.jpg",
+        "bytes": 81373,
+        "duration": 169
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/remera-logo-BoZlF0iS.jpg",
+        "bytes": 140299,
+        "duration": 176.09999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/hoodie-suenos-DEC4StiD.jpg",
+        "bytes": 144022,
+        "duration": 184.7000000011176
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/vinilo-suenos-D3y65a2M.jpg",
+        "bytes": 71164,
+        "duration": 172.19999999925494
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/cd-presagio-6nzwxm--.jpg",
+        "bytes": 922448,
+        "duration": 190.2999999988824
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/poster-tour-CTkggELg.jpg",
+        "bytes": 146770,
+        "duration": 176.59999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/gorra-BWTK3Toy.jpg",
+        "bytes": 162729,
+        "duration": 179
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/carousel-video-D0C7TiFg.mp4",
+        "bytes": 300,
+        "duration": 160.59999999962747
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/logo-B1X_xBA2.png",
+        "bytes": 38168,
+        "duration": 440.40000000037253
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/carousel-video-D0C7TiFg.mp4",
+        "bytes": 20892,
+        "duration": 524.4000000003725
+      },
+      {
+        "name": "https://traidoresno.vercel.app/assets/carousel-video-D0C7TiFg.mp4",
+        "bytes": 10958241,
+        "duration": 10348.60000000149
+      }
+    ],
+    "vue": false,
+    "react": true
+  }
+]

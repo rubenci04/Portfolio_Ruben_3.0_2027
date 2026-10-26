@@ -1,0 +1,7 @@
+{
+  "url": "https://bar-app-web.onrender.com/auth/login",
+  "title": "Iniciar Sesión - Don Enrique Bar-Gestión",
+  "capture": "Public login page. No authentication or private data accessed.",
+  "stackSource": "https://github.com/rubenci04/bar_app_web/blob/main/requirements.txt",
+  "featuresSource": "https://github.com/rubenci04/bar_app_web/blob/main/docs/UI_PHASE1_CHANGES.md"
+}

@@ -1,114 +1,94 @@
-.navbar {
-  width: 100%;
-  padding: 1rem 2rem;
-  background-color: var(--primary-bg-color); /* Correcto: Usa la variable global */
-  color: var(--text-color-light);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  background: #0b1422f2;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
 }
-
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--accent-color); /* Correcto: Usa la variable global */
-  text-decoration: none;
-  letter-spacing: 1px;
-}
-
-.navbar-links {
-  list-style: none;
+.navbar {
+  min-height: 82px;
   display: flex;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
 }
-
-.navbar-links li a {
-  color: var(--text-color-light);
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease;
+.navbar-logo {
+  font-size: 35px;
+  letter-spacing: -3px;
+  font-weight: 750;
+  display: flex;
+  align-items: center;
 }
-
-.navbar-links li a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background-color: var(--accent-color); /* Correcto: Usa la variable global */
-  left: 0;
-  bottom: -5px;
-  transition: width 0.3s ease;
+.navbar-logo > span:first-child {
+  color: var(--accent);
 }
-
-.navbar-links li a:hover {
-  color: var(--accent-color); /* Correcto: Usa la variable global */
+.logo-caption {
+  border-left: 1px solid var(--line);
+  padding-left: 15px;
+  margin-left: 18px;
+  font: 8px/1.65 var(--mono);
+  letter-spacing: 1.5px;
+  color: var(--muted);
 }
-
-.navbar-links li a:hover::after {
-  width: 100%;
-}
-
-/* --- Menú Hamburguesa (Responsive) --- */
-.hamburger-menu {
+.navbar-links {
   display: none;
+}
+.menu-toggle {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 22px;
+  margin-left: auto;
+}
+.nav-github {
+  display: none;
+}
+.navbar-links.is-open {
+  display: flex;
   flex-direction: column;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 20px;
   gap: 4px;
-  cursor: pointer;
-  z-index: 1001;
 }
-
-.hamburger-menu .bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: var(--accent-color); /* Correcto: Usa la variable global */
-  border-radius: 2px;
-  transition: all 0.3s ease;
+.navbar-links a {
+  padding: 13px 10px;
+  font-size: 13px;
+  color: var(--muted);
 }
-
-@media (max-width: 768px) {
-  .hamburger-menu {
-    display: flex;
-  }
-
-  .navbar-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    background-color: var(--primary-bg-color); /* Correcto: Usa la variable global */
-    padding: 1rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  }
-
-  .navbar-links.active {
-    display: flex;
-  }
-
-  .navbar-links li {
-    text-align: center;
-    padding: 0.8rem 0;
-  }
-
-  .navbar-links li a {
-    font-size: 1.2rem;
-  }
-  
-  .navbar-links li a::after {
+.navbar-links a:hover,
+.navbar-links a[aria-current] {
+  color: var(--accent);
+}
+@media (min-width: 900px) {
+  .menu-toggle {
     display: none;
   }
-  .navbar-links li a:hover::after {
-    width: 0;
+  .navbar-links,
+  .navbar-links.is-open {
+    display: flex;
+    position: static;
+    padding: 0;
+    flex-direction: row;
+    gap: 20px;
+    background: transparent;
+    border: 0;
+  }
+  .navbar-links a {
+    padding-inline: 0;
+  }
+  .nav-github {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 16px;
   }
 }

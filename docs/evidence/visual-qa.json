@@ -1,0 +1,50 @@
+[
+  {
+    "name": "mobile-375",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "cards": 12,
+    "portrait": {
+      "fit": "contain",
+      "width": 326,
+      "height": 326
+    }
+  },
+  {
+    "name": "tablet-768",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "cards": 12,
+    "portrait": {
+      "fit": "contain",
+      "width": 326,
+      "height": 326
+    }
+  },
+  {
+    "name": "desktop-1440",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "cards": 12,
+    "portrait": {
+      "fit": "contain",
+      "width": 326,
+      "height": 326
+    }
+  },
+  {
+    "name": "wide-1920",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "cards": 12,
+    "portrait": {
+      "fit": "contain",
+      "width": 326,
+      "height": 326
+    }
+  }
+]

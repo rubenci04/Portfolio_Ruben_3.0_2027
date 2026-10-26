@@ -1,89 +1,14 @@
-import { motion } from 'framer-motion'; // Importa motion de Framer Motion
-import { TypeAnimation } from 'react-type-animation'; // Importa el componente de animación de tipeo
-import './Hero.css';                    // Importa los estilos CSS específicos para Hero
-import profilePic from '../../assets/profile.png'; // Importa la imagen de perfil
-
-// --- Variantes para la animación escalonada del texto ---
-
-// Variante para el contenedor de texto: gestiona la aparición secuencial de sus hijos.
-const containerVariants = {
-  hidden: { opacity: 0 }, // El contenedor empieza invisible.
-  visible: {
-    opacity: 1, // Se hace visible.
-    transition: {
-      staggerChildren: 0.2, // Cada hijo se anima con un retraso de 0.2 segundos respecto al anterior.
-    },
-  },
-};
-
-// Variante para cada elemento de texto individual (título, nombre, descripción, botón).
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 }, // Empieza transparente y 20px más abajo.
-  visible: { opacity: 1, y: 0 }, // Termina visible y en su posición original (efecto de "subida").
-};
-
-// --- Componente Hero ---
-const Hero = () => {
-  return (
-    <section id="about" className="hero-container">
-      <div className="hero-content-wrapper">
-        {/* Contenedor de texto con animación de entrada escalonada */}
-        <motion.div
-          className="hero-text-content"
-          variants={containerVariants} // Aplica las variantes del contenedor
-          initial="hidden"             // Estado inicial definido por 'hidden'
-          animate="visible"            // Estado final definido por 'visible'
-        >
-          {/* Título con efecto de tipeo */}
-          <motion.div variants={itemVariants} className="hero-title-container">
-            <TypeAnimation
-              sequence={[
-                'DEVELOPER',
-                2000, // Espera 2 segundos
-                '',
-              ]}
-              wrapper="h1"
-              cursor={true}
-              repeat={Infinity}
-              className="hero-title"
-            />
-          </motion.div>
-          
-          <motion.h2 variants={itemVariants} className="hero-name">
-            RUBEN ALBARRACIN
-          </motion.h2>
-          
-          <motion.p variants={itemVariants} className="hero-description">
-            Estudiante avanzado de la Tecnicatura en Programación (UTN) con fuerte especialización en desarrollo web full-stack. Experiencia en la creación de aplicaciones interactivas con React, Vue.js y Python. Me desenvuelvo con naturalidad entre inteligencias artificiales para potenciar mi flujo de trabajo: desde la generación de código y la edición precisa con herramientas como Gemini, hasta la conceptualización de branding y marketing con agentes de IA. Utilizo una variedad de modelos como ChatGPT, Claude Sonnet, Microsoft Copilot y Grok para "vibe codear", explorando nuevas soluciones y manteniendo un ritmo de desarrollo ágil y moderno. Busco activamente mi primera oportunidad en el sector IT.
-          </motion.p>
-          
-          {/* El botón también se envuelve en motion.div para participar en el stagger */}
-          <motion.div variants={itemVariants}>
-            <a href="#projects" className="hero-button">
-              Ver mis proyectos
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* Contenedor de la imagen de perfil con animación de entrada y efecto hover */}
-        <motion.div 
-          className="hero-image-container"
-          initial={{ opacity: 0, scale: 0.8 }} // La imagen empieza un poco pequeña y transparente
-          animate={{ opacity: 1, scale: 1 }}    // Llega a su tamaño normal y es visible
-          transition={{ delay: 0.8, duration: 0.8 }} // Un pequeño retraso para que aparezca después del texto
-          
-          // Efecto al pasar el ratón por encima (whileHover)
-          whileHover={{ 
-            scale: 1.05, // La imagen se agranda un 5%
-            rotate: [0, 5, -5, 5, -5, 0], // Pequeño efecto de rotación tipo "agitación" o "bounce"
-            transition: { duration: 0.6, ease: "easeInOut" } // Transición suave para el efecto de hover
-          }}
-        >
-          <img src={profilePic} alt="Ruben Albarracin" className="profile-image" />
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-export default Hero;
+import { FiArrowDown, FiArrowUpRight } from 'react-icons/fi';
+import './Hero.css';
+export default function Hero() {
+ return <section id="home" className="hero container">
+  <div className="hero-copy"><div className="hero-intro"><span className="status-dot"/> CÓDIGO / CREATIVIDAD / UNIVERSO</div>
+  <p className="hero-name">Rubén Albarracín <span>↗</span></p>
+  <h1>Las ideas<br/>se vuelven<br/><span>realidad.</span></h1>
+  <p className="hero-role">Software Developer —<br/> Web Applications &amp; Game Development</p>
+  <p className="hero-description">Desarrollo aplicaciones web y videojuegos, combinando programación, creatividad y diseño para convertir ideas en proyectos reales.</p>
+  <div className="hero-actions"><a className="button button-primary" href="#projects">Explorar proyectos <FiArrowUpRight/></a><a className="button" href="#about">Sobre mí <FiArrowDown/></a></div></div>
+  <div className="studio-art" aria-hidden="true"><div className="art-topline"><span>RA / UNIVERSO DIGITAL</span><span>01 — ∞</span></div><div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="hero-planet core-object"><div className="planet-ring"/></div><div className="planet-coordinate">CREAR. CONSTRUIR. EXPLORAR.</div><div className="art-bottomline"><span>WEB + GAMES</span><span>TUCUMÁN · ARGENTINA</span></div></div>
+  <div className="hero-bottom"><span>UN UNIVERSO DE IDEAS, LÍNEA A LÍNEA.</span><a href="#projects">Seguí explorando <FiArrowDown/></a></div>
+ </section>;
+}

@@ -1,37 +1,45 @@
-/* --- Mis notas de estilos para el Footer --- */
 .footer-container {
-  padding: 3rem 2rem;
-  background-color: var(--primary-bg-color); /* Color de fondo oscuro principal */
-  color: var(--text-color-light);
-  text-align: center;
-  border-top: 1px solid #334155; /* Línea divisoria sutil */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-block: 30px;
+  border-top: 1px solid var(--line);
 }
-
-/* 1. Contenedor para los iconos sociales */
+.footer-container > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer-logo {
+  font-size: 30px;
+  letter-spacing: -2px;
+  font-weight: 700;
+}
+.footer-logo span {
+  color: var(--accent);
+}
+.footer-container p {
+  font-size: 10px;
+}
+.footer-container > span {
+  font: 8px var(--mono);
+  color: var(--muted);
+  letter-spacing: 1px;
+}
 .footer-social-links {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem; /* Espacio entre iconos */
-  margin-bottom: 1.5rem;
+  gap: 12px;
 }
-
-/* 2. Estilo individual de cada icono */
-.social-icon-link {
-  color: var(--text-color-light);
-  font-size: 1.8rem; /* Tamaño del icono */
-  transition: color 0.3s ease, transform 0.3s ease;
+.footer-social-links a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
 }
-
-/* 3. Efecto hover para los iconos */
-.social-icon-link:hover {
-  color: var(--accent-color); /* Cambia al color de acento al pasar el ratón */
-  transform: translateY(-5px); /* Eleva ligeramente el icono */
-}
-
-/* 4. Estilo para el texto de copyright */
-.footer-copyright p {
-  font-size: 0.9rem;
-  color: #a0aec0; /* Un color de texto más suave */
-  margin: 0;
+.footer-social-links a:hover {
+  color: var(--accent);
 }

@@ -1,48 +1,18 @@
-/* Adaptado de un efecto de estrellas de CodePen por K.C. Hunter */
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -10;
-  background: #000;
-  overflow: hidden; /* Evita que las estrellas generen scrollbars */
-}
-
-@keyframes animStar {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-2000px); }
-}
-
-#stars, #stars2, #stars3 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  background: transparent;
-}
-
-/* Estrellas pequeñas (700) */
-#stars {
-  animation: animStar 150s linear infinite;
-  box-shadow: 536px 1603px #FFF, 1211px 132px #FFF, 1055px 1263px #FFF, 194px 1213px #FFF, 1285px 1889px #FFF, 1079px 1873px #FFF, 1691px 1345px #FFF, 1653px 193px #FFF, 1592px 1032px #FFF, 1113px 1038px #FFF, 483px 1393px #FFF, 957px 1027px #FFF, 1333px 1240px #FFF, 54px 1312px #FFF, 1390px 1530px #FFF, 898px 137px #FFF, 126px 1245px #FFF, 1380px 129px #FFF, 688px 1235px #FFF, 1151px 1985px #FFF, 119px 1947px #FFF, 1098px 103px #FFF, 1018px 135px #FFF, 123px 1138px #FFF, 1902px 183px #FFF, 1718px 183px #FFF, 1899px 1338px #FFF, 1509px 1486px #FFF, 1858px 114px #FFF, 1191px 1196px #FFF, 182px 1893px #FFF, 1331px 1221px #FFF, 1439px 1806px #FFF, 901px 1892px #FFF, 1485px 173px #FFF, 1948px 1186px #FFF, 1018px 113px #FFF, 158px 1484px #FFF, 123px 1138px #FFF, 1902px 183px #FFF, 1718px 183px #FFF, 1301px 1262px #FFF, 106px 1069px #FFF, 1039px 1315px #FFF, 1984px 1192px #FFF, 125px 1445px #FFF, 1705px 1833px #FFF, 1019px 1195px #FFF, 121px 1139px #FFF, 1402px 1333px #FFF, 1349px 1930px #FFF, 1738px 1875px #FFF, 566px 1889px #FFF, 1289px 648px #FFF, 1149px 1883px #FFF, 162px 1001px #FFF, 1200px 1000px #FFF, 800px 500px #FFF, 300px 1500px #FFF, 1700px 800px #FFF, 1450px 300px #FFF, 900px 1800px #FFF, 250px 200px #FFF, 1950px 1400px #FFF, 600px 900px #FFF, 1300px 1600px #FFF;
-}
-
-/* Estrellas medianas (200) */
-#stars2 {
-  animation: animStar 100s linear infinite;
-  width: 2px;
-  height: 2px;
-  box-shadow: 1899px 1338px #FFF, 1509px 1486px #FFF, 1858px 114px #FFF, 1191px 1196px #FFF, 182px 1893px #FFF, 1331px 1221px #FFF, 1439px 1806px #FFF, 901px 1892px #FFF, 1485px 173px #FFF, 1948px 1186px #FFF, 1018px 113px #FFF, 158px 1484px #FFF, 123px 1138px #FFF, 1902px 183px #FFF, 1718px 183px #FFF, 450px 900px #FFF, 1350px 1900px #FFF, 850px 250px #FFF, 1750px 1100px #FFF, 200px 1600px #FFF;
-}
-
-/* Estrellas grandes (100) */
-#stars3 {
-  animation: animStar 50s linear infinite;
-  width: 3px;
-  height: 3px;
-  box-shadow: 1301px 1262px #FFF, 106px 1069px #FFF, 1039px 1315px #FFF, 1984px 1192px #FFF, 125px 1445px #FFF, 1705px 1833px #FFF, 1019px 1195px #FFF, 121px 1139px #FFF, 1402px 1333px #FFF, 1349px 1930px #FFF, 1738px 1875px #FFF, 566px 1889px #FFF, 1289px 648px #FFF, 1149px 1883px #FFF, 162px 1001px #FFF, 650px 400px #FFF, 1800px 1300px #FFF, 100px 800px #FFF, 1500px 1700px #FFF, 950px 100px #FFF;
-}
+.background { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: radial-gradient(ellipse at 80% 20%, #23304b66, transparent 48%), radial-gradient(ellipse at 10% 80%, #14354555, transparent 40%), #080f1e; }
+body { isolation: isolate; }
+.star-parallax { position: absolute; inset: -25px; transform: translate(var(--px, 0px), var(--py, 0px)); transition: transform 1s ease-out; }
+.stars { position: absolute; inset: -10% 0; animation: star-drift 45s linear infinite alternate; }
+.stars i { position: absolute; width: 1px; height: 1px; border-radius: 50%; background: #ebf5ff; }
+.stars-1 { animation-duration: 30s; }
+.stars-1 i { width: 2px; height: 2px; box-shadow: 0 0 5px #abcfff; }
+.stars-2 { animation-duration: 18s; }
+.stars-2 i { width: 3px; height: 3px; box-shadow: 0 0 10px #b2d6ff; }
+.distant-planet { position: absolute; border-radius: 50%; animation: celestial-float 19s ease-in-out infinite alternate; }
+.planet-blue { width: 100px; height: 100px; left: -30px; top: 68%; background: radial-gradient(circle at 28% 25%, #73a6b6, #234655 35%, #070d18 73%); box-shadow: -3px -2px 15px #88d8f52b; opacity: .5; }
+.planet-gold { width: 45px; height: 45px; right: 4%; top: 83%; background: radial-gradient(circle at 25% 20%, #d7bd88, #715c42 30%, #080e19 75%); animation-duration: 28s; opacity: .6; }
+.paused * { animation-play-state: paused !important; }
+.space-particles { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+@keyframes star-drift { to { transform: translate(12px, -12%); } }
+@keyframes celestial-float { to { transform: translateY(-18px) rotate(7deg); } }
+@media(max-width:600px) { .planet-blue { width: 65px; height:65px; opacity:.25; } .planet-gold { opacity:.25; } }
+@media(prefers-reduced-motion:reduce) { .star-parallax { transform:none; } .background * { animation:none; transition:none; } }

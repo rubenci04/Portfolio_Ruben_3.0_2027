@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local browser test output
+test-results/
+playwright-report/
+
+# Local environment and hosting state
+.env
+.env.*
+!.env.example
+.vercel/
+.netlify/
+.wrangler/

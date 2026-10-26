@@ -1,61 +1,53 @@
-/* --- Estilos para la sección de Skills --- */
-
-.skills-container {
-  padding: 4rem 2rem;
-  background-color: var(--dark-blue);
-  text-align: center;
+.skills-section {
+  border-block: 1px solid var(--line);
+  background: #ffffff02;
 }
-
-.skills-section-title {
-  font-size: 2.5rem;
-  color: var(--yellow);
-  margin-bottom: 3rem;
-}
-
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
+  gap: 24px;
 }
-
-.skill-item {
+.skill-group {
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+}
+.skill-top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  background-color: #1d3549;
-  padding: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  transition: border-color 0.3s ease;
+  margin-bottom: 25px;
 }
-
-/* --- MI NOTA: CORRECCIÓN CLAVE AQUÍ --- */
-/* Le doy un tamaño explícito al contenedor del icono. */
-.skill-icon {
-  width: 4rem;  /* Ancho fijo */
-  height: 4rem; /* Alto fijo */
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.skill-top svg {
+  color: var(--accent);
+  font-size: 24px;
 }
-
-/* Y me aseguro de que el SVG llene ese contenedor. */
-.skill-icon svg {
-    width: 100%;
-    height: 100%;
+.skill-top > span {
+  font: 10px var(--mono);
+  color: var(--muted);
 }
-
-
-.skill-name {
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--white);
+.skill-group h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
 }
-
-.skill-item:hover {
-  border-color: var(--yellow);
+.skill-group p {
+  font-size: 12px;
+  margin-bottom: 22px;
+}
+.skill-group .tags {
+  gap: 8px;
+}
+.skill-group .tags span {
+  font-size: 11px;
+  padding: 7px 9px;
+}
+@media (min-width: 650px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+@media (min-width: 1100px) {
+  .skills-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+  }
 }

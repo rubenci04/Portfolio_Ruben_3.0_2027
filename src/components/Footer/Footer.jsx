@@ -1,59 +1,44 @@
-// --- Mis notas de importación ---
-// 1. Importo React y los iconos necesarios de la librería react-icons.
-import React from 'react';
-import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
-import './Footer.css';
-
-const Footer = () => {
-  // --- Mis notas sobre configuración de enlaces ---
-  // 2. Defino mis enlaces personales. Debo reemplazar estos valores.
-  const githubUrl = "https://github.com/rubenci04"; // Reemplazar con tu URL de GitHub
-  const linkedinUrl = "https://www.linkedin.com/in/rubenalbarra/"; // Reemplazar con tu URL de LinkedIn
-  
-  // 3. Lógica para el enlace de WhatsApp (reutilizo la lógica de la sección de contacto).
-  const whatsappNumber = '+543812495381'; // Reemplazar con tu número real (código país + número)
-  const whatsappLink = `https://wa.me/${whatsappNumber}`;
-
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { profile } from "../../data/profile";
+import "./Footer.css";
+export default function Footer() {
   return (
-    <footer id="contact" className="footer-container">      {/* 4. Contenedor para los iconos de redes sociales. */}
+    <footer className="footer-container container">
+      <div>
+        <a className="footer-logo" href="#home">
+          ra<span>.</span>
+        </a>
+        <p>
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+      </div>
+      <span>HECHO CON CÓDIGO Y CURIOSIDAD.</span>
       <div className="footer-social-links">
-        <a 
-          href={githubUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          aria-label="GitHub Profile"
-          className="social-icon-link"
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="GitHub de Rubén Albarracín"
         >
           <FaGithub />
         </a>
-        <a 
-          href={linkedinUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          aria-label="LinkedIn Profile"
-          className="social-icon-link"
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn de Rubén Albarracín"
         >
           <FaLinkedin />
         </a>
-        <a 
-          href={whatsappLink} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          aria-label="Contact via WhatsApp"
-          className="social-icon-link"
+        <a
+          href={profile.whatsapp}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Contactar por WhatsApp"
         >
           <FaWhatsapp />
         </a>
       </div>
-
-      {/* 5. Texto de copyright. */}
-      <div className="footer-copyright">
-        <p>
-          &copy; {new Date().getFullYear()} Ruben Albarracin. Todos los derechos reservados.
-        </p>
-      </div>
     </footer>
   );
-};
-
-export default Footer;
+}

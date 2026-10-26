@@ -1,6 +1,0 @@
-/* --- Mis notas sobre la navegación suave --- */
-/* Esta regla le dice al navegador que cuando se active un enlace de anclaje (#),
-   debe animar el desplazamiento en lugar de saltar instantáneamente. */
-html {
-  scroll-behavior: smooth;
-}
