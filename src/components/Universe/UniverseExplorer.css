@@ -57,3 +57,36 @@
 .universe-information:has(.tour-actions) { position:fixed;right:22px;bottom:22px;z-index:60;width:min(410px,calc(100vw - 44px));min-height:0;max-height:45dvh;overflow-y:auto;border:var(--outline-large);border-radius:12px;box-shadow:var(--shadow); }
 .universe-information:has(.tour-actions) p { font-size:11px; }
 @media(max-width:600px) { .planet-site { width:82px;right:3%;bottom:12px; }.planet-ringed { width:155px;left:calc(50% - 77.5px);top:40px; }.rocket-control { right:calc(50% - 56px);font-size:8px; }.rocket-control svg { width:44px;height:44px; }.universe-information:has(.tour-actions) { right:16px;bottom:16px;width:calc(100vw - 32px);padding:14px; } }
+/* A roomy map at every width; navigation transforms the complete world. */
+.universe-help { font-size:11px;padding:12px 16px;background:#13223a;line-height:1.6; }
+.universe-scene { height:440px;cursor:grab; }
+.universe-scene:active { cursor:grabbing; }
+.universe-scene.is-navigating { touch-action:none; }
+.universe-world { transform:translate(calc(var(--pan-x,0px) + var(--look-x,0px)),calc(var(--pan-y,0px) + var(--look-y,0px))) scale(var(--scene-zoom,1));transition:none; }
+.planet-control { touch-action:inherit;user-select:none; }
+.planet-ringed { width:180px;left:calc(50% - 90px);top:125px; }
+.planet-amber { width:105px;right:7%;top:12px; }
+.planet-ice { width:110px;left:6%;top:14px;bottom:auto; }
+.planet-site { width:105px;right:7%;bottom:12px; }
+.rocket-control { left:5%;right:auto;bottom:12px; }
+.planet-label { font-size:11px; }
+.universe-toolbar { flex-wrap:wrap;gap:10px;justify-content:center; }
+.universe-toolbar .navigation-toggle { padding:8px;font:10px var(--mono);margin-right:auto; }
+.universe-toolbar .navigation-toggle[aria-pressed=true] { background:var(--accent);color:var(--ink); }
+@media(max-width:600px) {
+ .universe-heading { flex-wrap:wrap; }
+ .universe-scene { height:450px; }
+ .planet-ice { width:94px;left:7%;top:12px; }
+ .planet-amber { width:96px;right:5%;top:125px; }
+ .planet-amber .planet-label { max-width:130px;white-space:normal;line-height:1.4;text-align:center; }
+ .planet-ringed { width:155px;left:0;top:143px; }
+ .planet-site { width:96px;right:8%;bottom:10px; }
+ .rocket-control { left:8%;bottom:18px;font-size:10px; }
+ .rocket-control svg { width:52px;height:52px; }
+ .universe-toolbar .navigation-toggle { flex-basis:100%;margin:0; }
+ .universe-toolbar button { min-width:44px;min-height:44px; }
+ .planet-label { font-size:10px; }
+}
+@media(prefers-reduced-motion:reduce) { .universe-world { transform:translate(var(--pan-x,0px),var(--pan-y,0px)) scale(var(--scene-zoom,1)); } }
+@media(max-width:600px) { .universe-scene { height:520px; }.planet-ringed { top:157px; }.planet-amber { top:120px; } }
+@media(max-width:600px) { .rocket-control { width:110px;left:4%; }.rocket-control span { max-width:105px;text-align:center;line-height:1.5; } }

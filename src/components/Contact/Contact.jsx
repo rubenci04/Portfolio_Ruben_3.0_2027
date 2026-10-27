@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { FiArrowUpRight } from "react-icons/fi";
 import { profile } from "../../data/profile";
 import "./Contact.css";
@@ -9,31 +8,24 @@ const Contact = () => {
   const [status, setStatus] = useState("");
   const [sending, setSending] = useState(false);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     if (sending) return;
     setSending(true);
     setStatus("Enviando...");
 
-    emailjs
-      .sendForm(
-        "service_x64oieo", // Tu Service ID
-        "template_9d20gnb", // Tu Template ID
-        form.current,
-        {
-          publicKey: "LOnhUWaNCJ8TZlRlG", // Tu Public Key
-        },
-      )
-      .then(
-        () => {
-          setStatus("¡Mensaje enviado con éxito!");
-          form.current.reset();
-        },
-        () => {
-          setStatus("Error al enviar el mensaje. Inténtalo de nuevo.");
-        },
-      )
-      .finally(() => setSending(false));
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form.current)).toString(),
+      });
+      if (!response.ok) throw new Error('Submission failed');
+      setStatus('¡Mensaje enviado con éxito! Gracias por escribir.');
+      form.current.reset();
+    } catch {
+      setStatus('No se pudo enviar el mensaje. Conservamos tu texto; podés intentarlo de nuevo o escribirme por WhatsApp.');
+    } finally { setSending(false); }
   };
 
   return (
@@ -65,10 +57,16 @@ const Contact = () => {
         <div>
           <form
             ref={form}
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
             onSubmit={sendEmail}
             className="contact-form"
             aria-busy={sending}
           >
+            <input type="hidden" name="form-name" value="contact" />
+            <div hidden><label>No completar <input name="bot-field" tabIndex="-1" autoComplete="off" /></label></div>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="name">Tu Nombre</label>
@@ -122,6 +120,7 @@ const Contact = () => {
           <p className="status-message" role="status" aria-live="polite">
             {status}
           </p>
+          <a className="text-link" href={profile.whatsapp} target="_blank" rel="noreferrer">Escribirme por WhatsApp <FiArrowUpRight /></a>
         </div>
       </div>
     </section>
