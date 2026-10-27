@@ -66,6 +66,16 @@ function planet(r, tones, ring) {
     draw(c) {
       if (ring) { c.lineWidth = 6; c.strokeStyle = INK; c.beginPath(); c.ellipse(0, 0, r * 1.45, r * 0.4, -0.35, 0, TAU); c.stroke(); }
       cel(c, (k) => k.arc(0, 0, r, 0, TAU), tones, [-r, -r, r * 2, r * 2], 3);
+      c.save(); c.beginPath(); c.arc(0, 0, r - 1.5, 0, TAU); c.clip(); c.rotate(-0.35);
+      if (ring) {
+        c.fillStyle = tones[2];
+        c.fillRect(-r, -r * 0.55, r * 2, r * 0.16); c.fillRect(-r, -r * 0.05, r * 2, r * 0.26); c.fillRect(-r, r * 0.5, r * 2, r * 0.12);
+        c.fillStyle = tones[0]; c.fillRect(-r, -r * 0.3, r * 2, r * 0.08);
+      } else {
+        c.fillStyle = tones[2];
+        for (const [x, y, k] of [[-0.35, -0.3, 0.26], [0.3, 0.1, 0.2], [-0.1, 0.5, 0.15]]) { c.beginPath(); c.arc(x * r, y * r, k * r, 0, TAU); c.fill(); c.lineWidth = 1.5; c.strokeStyle = INK; c.stroke(); }
+      }
+      c.restore();
       if (ring) { c.lineWidth = 3; c.strokeStyle = tones[0]; c.beginPath(); c.ellipse(0, 0, r * 1.45, r * 0.4, -0.35, 0.15, Math.PI - 0.15); c.stroke(); }
     },
   };
@@ -73,17 +83,25 @@ function planet(r, tones, ring) {
 
 const DEFS = {
   bee: {
-    w: 56, h: 64,
+    w: 56, h: 74,
     draw(c) {
       const wing = (sx) => cel(c, (k) => k.ellipse(sx * 16, -2, 12, 7, sx * -0.6, 0, TAU), ['#f4fdff', '#bfeaff', '#8cc6e8'], [sx * 16 - 12, -9, 24, 14], 2);
       wing(-1); wing(1);
+      c.lineWidth = 2.5; c.strokeStyle = INK; c.fillStyle = '#ffd166';
+      for (const sx of [-1, 1]) {
+        c.beginPath(); c.moveTo(sx * 4, -21); c.quadraticCurveTo(sx * 8, -33, sx * 15, -31); c.stroke();
+        c.beginPath(); c.arc(sx * 15, -31, 3.2, 0, TAU); c.fill(); c.stroke();
+      }
       const body = (k) => k.ellipse(0, 8, 13, 17, 0, 0, TAU);
       cel(c, body, ['#fff0a8', '#ffd166', '#e69f2e'], [-13, -9, 26, 34], 2.5);
       c.save(); c.beginPath(); body(c); c.clip(); c.fillStyle = INK;
       c.fillRect(-14, 7, 28, 5); c.fillRect(-14, 16, 28, 5); c.restore();
       cel(c, (k) => k.arc(0, -10, 8, 0, TAU), ['#fff0a8', '#ffd166', '#e69f2e'], [-8, -18, 16, 16], 2);
-      c.fillStyle = INK; c.fillRect(-4.5, -12, 2.4, 4); c.fillRect(2.1, -12, 2.4, 4);
-      c.globalAlpha = 0.5; c.fillStyle = '#9fdcff'; c.beginPath(); c.arc(0, -10, 13, 0, TAU); c.fill(); c.globalAlpha = 1;
+      c.fillStyle = INK;
+      c.beginPath(); c.ellipse(-3.6, -11, 2.2, 3.2, 0, 0, TAU); c.ellipse(3.6, -11, 2.2, 3.2, 0, 0, TAU); c.fill();
+      c.fillStyle = '#fff'; c.fillRect(-4.2, -12.6, 1.1, 1.1); c.fillRect(3, -12.6, 1.1, 1.1);
+      c.lineWidth = 1.5; c.strokeStyle = INK; c.beginPath(); c.arc(0, -8, 2.6, 0.2, Math.PI - 0.2); c.stroke();
+      c.globalAlpha = 0.28; c.fillStyle = '#9fdcff'; c.beginPath(); c.arc(0, -10, 13, 0, TAU); c.fill(); c.globalAlpha = 1;
       c.lineWidth = 3; c.strokeStyle = INK; c.beginPath(); c.arc(0, -10, 13, 0, TAU); c.stroke();
       c.lineWidth = 2.2; c.strokeStyle = '#fff'; c.beginPath(); c.arc(0, -10, 9, Math.PI * 1.15, Math.PI * 1.55); c.stroke();
     },
@@ -98,7 +116,23 @@ const DEFS = {
   ast0: asteroid(12),
   ast1: asteroid(20),
   ast2: asteroid(30),
-  bullet: { w: 10, h: 22, draw(c) { cel(c, (k) => k.roundRect(-3, -9, 6, 18, 3), ['#ffffff', '#fff0a8', '#ffd166'], [-3, -9, 6, 18], 2); } },
+  bullet: {
+    w: 16, h: 28,
+    draw(c) {
+      cel(c, (k) => { k.moveTo(0, -13); k.lineTo(4.5, 2); k.arc(0, 4, 5.5, -0.5, Math.PI + 0.5); k.closePath(); }, ['#d6fbff', '#4fe0ff', '#2a8fd6'], [-6, -13, 12, 24], 2.2);
+      c.fillStyle = '#fff'; c.beginPath(); c.arc(0, 4, 2.6, 0, TAU); c.fill();
+    },
+  },
+  boss: {
+    w: 120, h: 92,
+    draw(c) {
+      cel(c, (k) => { k.moveTo(0, 42); k.lineTo(34, 18); k.lineTo(56, 28); k.lineTo(50, -12); k.lineTo(26, -36); k.lineTo(0, -28); k.lineTo(-26, -36); k.lineTo(-50, -12); k.lineTo(-56, 28); k.lineTo(-34, 18); k.closePath(); }, ['#d9b3ff', '#8a4fd6', '#4d2a8f'], [-56, -36, 112, 78], 3.5);
+      for (const sx of [-1, 1]) cel(c, (k) => k.roundRect(sx * 38 - 7, 14, 14, 26, 4), ['#ffb0bd', '#e5486b', '#9c2a52'], [sx * 38 - 7, 14, 14, 26], 2.5);
+      cel(c, (k) => k.arc(0, -4, 16, 0, TAU), ['#fff6e4', '#ffd166', '#e69f2e'], [-16, -20, 32, 32], 3);
+      c.fillStyle = INK; c.beginPath(); c.ellipse(0, -4, 5, 9, 0, 0, TAU); c.fill();
+      c.fillStyle = '#ff5fbf'; c.fillRect(-2, -9, 4, 4);
+    },
+  },
   ebullet: { w: 14, h: 14, draw(c) { cel(c, (k) => k.arc(0, 0, 5, 0, TAU), ['#ffd0ec', '#ff5fbf', '#a62f86'], [-5, -5, 10, 10], 2); } },
   'item-0': badge('', '#1c9fc4', 'atom'),
   'item-1': badge('G', '#478cbf'),

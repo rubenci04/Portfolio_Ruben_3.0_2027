@@ -15,12 +15,13 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
   const diff = reduced ? 0.7 : 1, par = reduced ? 0.25 : 1;
 
   const pb = mk(48, { x: 0, y: 0, vx: 0, vy: 0 });
-  const eb = mk(40, { x: 0, y: 0, vx: 0, vy: 0 });
+  const eb = mk(140, { x: 0, y: 0, vx: 0, vy: 0 });
   const ast = mk(40, { x: 0, y: 0, vx: 0, vy: 0, size: 0, rot: 0, vr: 0 });
   const sc = mk(12, { x: 0, y: 0, x0: 0, t: 0, hp: 0, kind: 0, fire: 0, dir: 1 });
   const it = mk(6, { x: 0, y: 0, type: 0 });
   const pt = mk(80, { x: 0, y: 0, vx: 0, vy: 0, life: 0, s: 3, col: '#fff' });
   const tx = mk(6, { x: 0, y: 0, t: 0, s: '' });
+  const B = { on: false, x: 0, y: -80, hp: 0, max: 1, t: 0, a: 0, b: 0, lvl: 0 };
   const pools = [pb, eb, ast, sc, it, pt, tx];
 
   const stars = Array.from({ length: 84 }, (_, i) => ({ x: rand(0, 420), y: rand(0, H), l: i % 3 }));
@@ -32,7 +33,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
   const keys = { l: 0, r: 0, u: 0, d: 0 };
 
   const mult = () => Math.min(1 + (g.combo >> 2), 5);
-  const sp = () => Math.min(2, diff * (1 + 0.07 * (g.wave - 1)));
+  const sp = () => Math.min(2.6, diff * (1 + 0.07 * (g.wave - 1)));
   const setState = (s) => { g.state = s; hooks.state(s); };
 
   function resize() {
@@ -49,7 +50,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
   }
 
   function reset() {
-    pools.forEach((p) => p.forEach((o) => { o.on = false; }));
+    pools.forEach((p) => p.forEach((o) => { o.on = false; })); B.on = false;
     Object.assign(g, { score: 0, lives: 3, wave: 0, combo: 0, comboT: 0, inv: 0, shield: 0, triple: 0, fast: 0, fireT: 0, shake: 0, time: 0, say: 500 });
     P.x = P.tx = W / 2; P.y = P.ty = H - 130;
     dirty = true;
@@ -59,7 +60,12 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
     g.wave = n;
     g.left.ast = Math.min(4 + n * 2, 24);
     g.left.sc = n < 2 ? 0 : Math.min(n, 9);
-    g.spawnT = 1.2; g.banner = 2; g.bannerText = `Oleada ${n}`;
+    if (n % 5 === 0) {
+      g.left.ast = 5; g.left.sc = 0;
+      B.on = true; B.lvl = n / 5; B.max = B.hp = 28 + 16 * B.lvl; B.x = W / 2; B.y = -80; B.t = 0; B.a = 1.5; B.b = 3;
+      g.bannerText = '¡Mini jefe!'; hooks.say('¡Mini jefe!');
+    }
+    g.spawnT = 1.2; g.banner = 2; if (n % 5) g.bannerText = `Oleada ${n}`;
     if (n > 1) { g.score += n * 50; dirty = true; hooks.say(`Oleada ${n}`); audio.play('wave'); }
   }
 
@@ -104,6 +110,32 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
     audio.play(a.size ? 'boom' : 'pop');
     if (a.size > 0) { frag(a, -1); frag(a, 1); } else drop(a.x, a.y, 0.1);
     a.on = false;
+  }
+
+  function hurtBoss() {
+    if (--B.hp > 0) { if (B.hp % 3 === 0) audio.play('pop'); return; }
+    B.on = false; addScore(1000 * B.lvl); audio.play('boom'); boom(B.x, B.y, '#8a4fd6', 30);
+    for (let k = 0; k < 2; k++) drop(B.x + k * 30 - 15, B.y, 1);
+    hooks.say('Mini jefe derrotado');
+  }
+
+  function bossFire(n, spread, speed, aim) {
+    const base = aim ? Math.atan2(P.y - B.y, P.x - B.x) : Math.PI / 2;
+    for (let k = 0; k < n; k++) {
+      const a = base + (n === 1 ? 0 : (k / (n - 1) - 0.5) * spread);
+      shoot(B.x, B.y + 30, Math.cos(a) * speed, Math.sin(a) * speed, eb);
+    }
+  }
+
+  function updateBoss(dt) {
+    B.t += dt;
+    B.y += (110 - B.y) * Math.min(1, dt * 2);
+    B.x = W / 2 + Math.sin(B.t * (0.7 + 0.08 * B.lvl)) * (W / 2 - 70);
+    const k = 1 + 0.15 * B.lvl, hard = B.hp < B.max / 2 ? 1.3 : 1;
+    if (B.t < 1.5) return;
+    if ((B.a -= dt) <= 0) { B.a = 1.5 / (k * hard); bossFire(Math.min(3 + B.lvl, 9), 0.9, 200 + 12 * B.lvl, true); }
+    if ((B.b -= dt) <= 0) { B.b = 3.4 / hard; bossFire(Math.min(10 + 2 * B.lvl, 22), TAU, 130 + 8 * B.lvl, false); }
+    if (hit(P.x, P.y, 9, B.x, B.y, 38)) damage();
   }
 
   function hurtScout(s) {
@@ -203,7 +235,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
     } else if (g.waveDelay > 0) {
       if ((g.waveDelay -= dt) <= 0) startWave(g.wave + 1);
     } else {
-      let alive = false;
+      let alive = B.on;
       for (let i = 0; i < ast.length; i++) if (ast[i].on) alive = true;
       for (let i = 0; i < sc.length; i++) if (sc[i].on) alive = true;
       if (!alive) g.waveDelay = 1.5;
@@ -217,6 +249,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
         const a = ast[j];
         if (a.on && hit(b.x, b.y, 4, a.x, a.y, RADIUS[a.size] * 0.9)) { b.on = false; breakAst(a); }
       }
+      if (B.on && b.on && hit(b.x, b.y, 4, B.x, B.y, 40)) { b.on = false; hurtBoss(); }
       for (let j = 0; j < sc.length && b.on; j++) {
         const s = sc[j];
         if (s.on && hit(b.x, b.y, 4, s.x, s.y, 15)) { b.on = false; hurtScout(s); }
@@ -249,6 +282,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
       if (hit(P.x, P.y, 9, s.x, s.y, 13)) { if (damage()) hurtScout(s); }
     }
 
+    if (B.on) updateBoss(dt);
     for (let i = 0; i < eb.length; i++) {
       const b = eb[i]; if (!b.on) continue;
       b.x += b.vx * dt; b.y += b.vy * dt;
@@ -301,6 +335,11 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
 
     for (let i = 0; i < ast.length; i++) { const a = ast[i]; if (a.on) spr.draw(c, `ast${a.size}`, a.x, a.y, a.rot); }
     for (let i = 0; i < sc.length; i++) { const s = sc[i]; if (s.on) spr.draw(c, 'scout', s.x, s.y); }
+    if (B.on) {
+      spr.draw(c, 'boss', B.x, B.y);
+      c.fillStyle = '#050b17'; c.fillRect(W / 2 - 62, 66, 124, 10);
+      c.fillStyle = '#ff5fbf'; c.fillRect(W / 2 - 60, 68, 120 * (B.hp / B.max), 6);
+    }
     for (let i = 0; i < it.length; i++) { const o = it[i]; if (o.on) spr.draw(c, `item-${o.type}`, o.x, o.y); }
     for (let i = 0; i < pb.length; i++) { const b = pb[i]; if (b.on) spr.draw(c, 'bullet', b.x, b.y, b.vx * 0.0008); }
     for (let i = 0; i < eb.length; i++) { const b = eb[i]; if (b.on) spr.draw(c, 'ebullet', b.x, b.y); }
