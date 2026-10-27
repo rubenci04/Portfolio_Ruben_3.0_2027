@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 let activeVideo = null;
-const reducedQuery = "(prefers-reduced-motion: reduce)";
-const subscribeMotion = listener => {
-  const preference = matchMedia(reducedQuery);
-  preference.addEventListener("change", listener);
-  return () => preference.removeEventListener("change", listener);
+const previewQuery = '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
+const subscribe = listener => {
+  const preference = matchMedia(previewQuery);
+  preference.addEventListener('change', listener);
+  return () => preference.removeEventListener('change', listener);
 };
+const sizeCache = new Map();
+const limit = 4_000_000;
 
 export default function GameplayPreview({ media, title, children }) {
   const video = useRef(null);
@@ -15,8 +17,9 @@ export default function GameplayPreview({ media, title, children }) {
   const [armed, setArmed] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
-  const reduced = useSyncExternalStore(subscribeMotion, () => matchMedia(reducedQuery).matches, () => true);
-  const available = Boolean(media.previewVideo || media.previewWebm);
+  const finePointer = useSyncExternalStore(subscribe, () => matchMedia(previewQuery).matches, () => false);
+  const source = media.previewVideo || media.previewWebm;
+  const eligible = Boolean(finePointer && source && !failed && (!media.previewBytes || media.previewBytes <= limit));
   const pause = () => { wantsPlayback.current = false; video.current?.pause(); };
 
   useEffect(() => {
@@ -26,42 +29,46 @@ export default function GameplayPreview({ media, title, children }) {
       if (!entries[0].isIntersecting) { wantsPlayback.current = false; current.pause(); }
     });
     observer.observe(host.current);
-    // The first interaction mounts the video. Start loading only after that mount.
-    if (wantsPlayback.current) current.play().catch(() => setPlaying(false));
+    if (wantsPlayback.current) current.play().catch(() => {});
     const hidden = () => { if (document.hidden) { wantsPlayback.current = false; current.pause(); } };
-    document.addEventListener("visibilitychange", hidden);
+    document.addEventListener('visibilitychange', hidden);
     return () => {
       current.pause();
       if (activeVideo === current) activeVideo = null;
       observer.disconnect();
-      document.removeEventListener("visibilitychange", hidden);
+      document.removeEventListener('visibilitychange', hidden);
     };
-  }, [armed, failed]);
+  }, [armed, eligible]);
 
-  useEffect(() => { if (reduced) { wantsPlayback.current = false; video.current?.pause(); } }, [reduced]);
-
-  const play = () => {
-    if (!available || failed) return;
+  const play = async () => {
+    if (!eligible) return;
     wantsPlayback.current = true;
+    let bytes = media.previewBytes || sizeCache.get(source);
+    if (!bytes) {
+      // A HEAD request verifies future videos before downloading; no code edit is needed.
+      try {
+        const response = await fetch(source, { method: 'HEAD' });
+        bytes = response.ok ? Number(response.headers.get('content-length')) : 0;
+        if (bytes > 0) sizeCache.set(source, bytes);
+      } catch { return; }
+    }
+    if (!(bytes > 0 && bytes <= limit) || !wantsPlayback.current || !matchMedia(previewQuery).matches) return;
     setArmed(true);
-    if (video.current) video.current.play().catch(() => {
-      // Autoplay can be denied; the explicit play control remains available.
-      setPlaying(false);
-    });
+    video.current?.play().catch(() => {});
   };
-  const loaded = () => { if (wantsPlayback.current) video.current?.play().catch(() => setPlaying(false)); };
-  if (!available || failed) return <>{children}</>;
-  return <div ref={host} className={`gameplay-preview ${playing ? "is-playing" : ""}`}
-    onPointerEnter={event => { if (event.pointerType === "mouse" && !reduced && matchMedia("(hover: hover)").matches) play(); }}
-    onPointerLeave={pause}>
+
+  if (!eligible) return <>{children}</>;
+  return <div ref={host} className={`gameplay-preview ${playing ? 'is-playing' : ''}`} tabIndex="0" aria-label={`Preview de ${title}`}
+    onPointerEnter={event => { if (event.pointerType !== 'touch') play(); }} onPointerLeave={pause}
+    onFocus={play} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) pause(); }}>
     {children}
     {armed && <video ref={video} muted playsInline loop preload="none" poster={media.poster || undefined}
-      aria-label={`Preview de ${title}`} onLoadedData={loaded}
-      onPlay={() => { if (activeVideo && activeVideo !== video.current) activeVideo.pause(); activeVideo = video.current; setPlaying(true); }}
-      onPause={() => setPlaying(false)} onError={() => { pause(); setFailed(true); }}>
-      {media.previewWebm && <source src={media.previewWebm} type="video/webm"/>}
-      {media.previewVideo && <source src={media.previewVideo} type="video/mp4"/>}
-    </video>}
-    <button className="preview-toggle" type="button" aria-label={`${playing ? "Pausar" : "Reproducir"} preview de ${title}`} onClick={() => playing ? pause() : play()}>{playing ? "Ⅱ Pausar" : "▷ Ver preview"}</button>
+      aria-label={`Video preview de ${title}`} src={source}
+      onPlay={() => {
+        if (!wantsPlayback.current) { video.current.pause(); return; }
+        if (activeVideo && activeVideo !== video.current) activeVideo.pause();
+        activeVideo = video.current; setPlaying(true);
+      }} onPause={() => setPlaying(false)} onError={() => { pause(); setFailed(true); }}/ >}
+    <button className="preview-toggle" type="button" aria-label={`${playing ? 'Pausar' : 'Reproducir'} preview de ${title}`} onClick={() => playing ? pause() : play()}>{playing ? 'Ⅱ Pausar' : '▷ Ver preview'}</button>
   </div>;
 }

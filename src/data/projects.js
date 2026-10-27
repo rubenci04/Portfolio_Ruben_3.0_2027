@@ -5,6 +5,7 @@ import esteticars from "../assets/cards_images/esteticars.webp";
 import donenrique from "../assets/cards_images/donenrique.webp";
 import portfolio from "../assets/cards_images/portfolio.webp";
 import barGestion from "../assets/cards_images/bar-gestion-login.webp";
+import { discoverMedia } from './projectMedia';
 
 export const categories = [
  { id: 'all', label: 'Todos' },
@@ -31,7 +32,8 @@ const currentProjects = [
     coverTitle: ["Aprender.", "Simular.", "Comprender."],
     image: null,
     video: null,
-    demo: null,
+    demo: "https://edu-app-contable.rea-04.workers.dev/",
+    demoLabel: "Abrir app",
     repository: null,
   },
   {
@@ -42,12 +44,11 @@ const currentProjects = [
       "Aplicación para administrar mesas, pedidos, productos, stock y caja de Don Enrique. Acceso con usuarios y permisos para las tareas de administración y atención del bar.",
     technologies: ["Python", "Flask", "SQLAlchemy", "Jinja2", "Tailwind CSS"],
     status: "published",
-    statusLabel: "Acceso privado",
-    availability: "Requiere usuario y contraseña. La captura muestra la pantalla pública de acceso.",
+    statusLabel: "Uso privado",
+    availability: "Aplicación de uso privado, sin demo pública. Mira el video y las capturas.",
     image: barGestion,
-    imageAlt: "Pantalla pública de inicio de sesión de Don Enrique Bar-Gestión",
-    demo: "https://bar-app-web.onrender.com/",
-    demoLabel: "Abrir acceso",
+    imageAlt: "Dashboard de administración de Don Enrique · Gestión del bar",
+    demo: null,
     repository: "https://github.com/rubenci04/bar_app_web",
   },
   {
@@ -198,22 +199,30 @@ const androidProjects = [
  },
 ];
 legacyProjects.push(
- {id:'python',title:'App Python',description:'Aplicación de escritorio desarrollada con Python y Tkinter. Trabajo conservado del catálogo original.', technologies:['Python','Tkinter'],image:python,demo:null,status:'archived',category:'desktop',categoryLabel:'Aplicación de escritorio',availability:'Sin demo pública verificada.'},
- {id:'tejido',title:'Emprendimiento de Tejido',description:'Proyecto de comercio electrónico para un emprendimiento de tejidos a crochet, en desarrollo.',technologies:['React','Node.js','Express','MongoDB'],image:tejido,demo:null,status:'development',category:'web'},
+ {id:'python',title:'App Python',hidden:true,description:'Aplicación de escritorio desarrollada con Python y Tkinter. Trabajo conservado del catálogo original.', technologies:['Python','Tkinter'],image:python,demo:null,status:'archived',category:'desktop',categoryLabel:'Aplicación de escritorio',availability:'Sin demo pública verificada.'},
+ {id:'tejido',title:'Emprendimiento de Tejido',hidden:true,description:'Proyecto de comercio electrónico para un emprendimiento de tejidos a crochet, en desarrollo.',technologies:['React','Node.js','Express','MongoDB'],image:tejido,demo:null,status:'development',category:'web'},
 );
 const defaultMedia = {cover:null,poster:null,screenshots:[],previewVideo:null,previewWebm:null,aspectRatio:'16 / 9',mediaStatus:'pending'};
 function normalize(project) {
  const category = project.category === 'archive' || !project.category ? (project.id==='kiosco'?'web':'site') : project.category;
  const status=project.status || 'archived';
- return {...project,category,categories:[category],status,
+ const discovered=discoverMedia(project.id, project.title);
+ const cover=discovered.cover || project.media?.cover || project.image || null;
+ const screenshots=discovered.screenshots.length ? discovered.screenshots : project.media?.screenshots || (cover ? [{src:cover,alt:`Captura 1 de ${project.title}`}] : []);
+ const videos=discovered.videos.length ? discovered.videos : project.media?.videos || [];
+ const media={...defaultMedia,...project.media,cover,poster:discovered.poster || project.media?.poster || cover,screenshots,videos};
+ media.previewVideo=videos[0]?.src || media.previewVideo;
+ media.previewBytes=videos[0]?.bytes || null;
+ media.mediaStatus=cover || screenshots.length || videos.length ? 'available' : 'pending';
+ return {...project,image:cover,category,categories:[category],status,
   features:project.features || [],
-  media:{...defaultMedia,cover:project.image || null,mediaStatus:project.image?'available':'pending',...project.media},
+  media,
  };
 }
 export const allProjects = [...currentProjects,...androidProjects,...legacyProjects].map(normalize);
 export const featuredIds = ['bee-alien','tucuman-rush','reclutador','crochet-match','ricota-quiz','edu-app'];
-export const featuredProjects = featuredIds.map(id=>allProjects.find(project=>project.id===id));
-export const projects = allProjects;
+export const featuredProjects = featuredIds.map(id=>allProjects.find(project=>project.id===id)).filter(project=>project && !project.hidden);
+export const projects = allProjects.filter(project=>!project.hidden);
 export function filterProjects(category) {
- return category==='all' ? allProjects : allProjects.filter(project=>project.categories.includes(category));
+ return projects.filter(project=>category==='all' || project.categories.includes(category));
 }

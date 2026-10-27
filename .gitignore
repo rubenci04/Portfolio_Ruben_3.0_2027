@@ -34,3 +34,6 @@ playwright-report/
 .vercel/
 .netlify/
 .wrangler/
+
+# Original project material (optimized copies live in src/assets/media)
+/src/assets/proyects_media/

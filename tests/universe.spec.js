@@ -56,16 +56,17 @@ test("pausa global y rueda de scroll sin secuestro", async ({ page }) => {
   await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before);
 });
 
-test("Android, fallbacks sin videos y fichas con foco restaurado", async ({ page }) => {
+test("Android, capturas y videos en fichas con foco restaurado", async ({ page }) => {
   const mediaRequests = [];
   page.on("request", request => { if (/\.(mp4|webm)(\?|$)/.test(request.url())) mediaRequests.push(request.url()); });
   await page.goto("/");
   await page.getByRole("button", { name: /^Android/ }).click();
   await expect(page.locator("#catalog .project-card")).toHaveCount(2);
-  await expect(page.locator("#catalog .phone-frame")).toHaveCount(2);
+  await expect(page.locator("#catalog img.real-mobile")).toHaveCount(2);
   const ratio = await page.locator("#catalog .project-cover").first().evaluate(element => element.clientWidth / element.clientHeight);
   expect(ratio).toBeCloseTo(16 / 9, 1);
   await expect(page.locator("video")).toHaveCount(0);
+  expect(mediaRequests).toEqual([]);
   for (const [id, title, repo] of [["ostoappar", "OstoAppAR", "OstoAppAR"], ["gym-scientific", "Gym Scientific App", "gym_scientific_app"]]) {
     const card = page.locator(`#catalog [data-project="${id}"]`);
     await expect(card).toContainText("Funcional · APK");
@@ -74,10 +75,11 @@ test("Android, fallbacks sin videos y fichas con foco restaurado", async ({ page
     await button.click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toContainText("distribuida mediante APK");
-    await expect(dialog.locator(".project-gallery")).toHaveCount(0);
+    await expect(dialog.locator(".project-gallery")).toHaveCount(1);
+    await expect(dialog.locator("video[controls]")).toHaveCount(1);
+    await expect(dialog.locator("video")).toHaveJSProperty("paused",true);
     await expect(dialog.locator('a[download]')).toHaveCount(0);
     await page.keyboard.press("Escape");
     await expect(button).toBeFocused();
   }
-  expect(mediaRequests).toEqual([]);
 });
