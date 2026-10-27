@@ -7,7 +7,7 @@ export default function About() {
     <section id="about" className="section container about-section">
       <div className="about-portrait">
         <div className="portrait-frame">
-          <img src={profilePic} alt="Retrato de Rubén Albarracín" width="864" height="1184" loading="lazy" />
+          <img src={profilePic} alt="Rubén Albarracín junto a su computadora y su gato" width="900" height="1200" loading="lazy" decoding="async" />
         </div>
         <span>DESDE ARGENTINA, CON CREATIVIDAD.</span>
       </div>
