@@ -50,7 +50,7 @@ export function createAudio() {
       if (on && ac.state === 'suspended') ac.resume();
       return on;
     },
-    play(name) { if (on && ac) sounds[name]?.(); },
+    play(name) { if (on && ac) { if (ac.state === 'suspended') ac.resume(); sounds[name]?.(); } },
     close() { on = false; ac?.close?.(); ac = null; },
   };
 }

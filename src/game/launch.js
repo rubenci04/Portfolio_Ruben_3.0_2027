@@ -35,6 +35,9 @@ function injectStyle() {
 }
 
 const readBest = () => { try { return Number(localStorage.getItem(BEST_KEY)) || 0; } catch { return 0; } };
+const MUTE_KEY = 'bee-space-muted';
+const wantsSound = () => { try { return localStorage.getItem(MUTE_KEY) !== '1'; } catch { return true; } };
+const saveMuted = (m) => { try { localStorage.setItem(MUTE_KEY, m ? '1' : '0'); } catch { /* sin almacenamiento */ } };
 const writeBest = (n) => { try { localStorage.setItem(BEST_KEY, String(n)); } catch { /* sin almacenamiento */ } };
 
 let opened = false;
@@ -126,12 +129,17 @@ export function openGame(trigger) {
     }
   });
   $('.sg-close').addEventListener('click', close);
-  soundBtn.addEventListener('click', () => {
-    const on = audio.toggle();
+  const paintSound = (on) => {
     soundBtn.setAttribute('aria-pressed', String(on));
     soundBtn.setAttribute('aria-label', on ? 'Silenciar sonido' : 'Activar sonido');
     soundBtn.textContent = on ? 'Sonido: sí' : 'Sonido: no';
-  });
+  };
+  soundBtn.addEventListener('click', () => { const on = audio.toggle(); saveMuted(!on); paintSound(on); });
+  // El audio arranca activo (salvo que el visitante lo haya silenciado antes); el clic en "Jugar" es el gesto que lo habilita.
+  const wantSound = wantsSound();
+  if (wantSound) paintSound(audio.toggle());
+  overlay.addEventListener('click', () => { if (wantSound && !audio.on && !soundBtn.dataset.touched) paintSound(audio.toggle()); }, { once: true });
+  soundBtn.addEventListener('click', () => { soundBtn.dataset.touched = '1'; });
   dialog.addEventListener('cancel', (e) => { e.preventDefault(); game?.pause(); close(); });
   dialog.addEventListener('close', close);
 
