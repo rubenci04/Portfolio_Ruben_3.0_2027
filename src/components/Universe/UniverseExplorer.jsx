@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FiMinus, FiPlus, FiRotateCcw, FiX, FiArrowRight } from "react-icons/fi";
+import { FiMinus, FiPlus, FiRotateCcw, FiX, FiArrowRight, FiPlay } from "react-icons/fi";
 import { featuredProjects } from "../../data/projects";
 import "./UniverseExplorer.css";
 import CelPlanet from './CelPlanet';
@@ -103,6 +103,7 @@ export default function UniverseExplorer({ onExploreCategory, onOpenProject, ena
       <div className="universe-world" style={{ "--scene-zoom": zoom, '--pan-x': `${pan.x}px`, '--pan-y': `${pan.y}px` }}>
         <div className="universe-orbit orbit-a" aria-hidden="true"/><div className="universe-orbit orbit-b" aria-hidden="true"/>
         {planets.map(planet => <button key={planet.id} type="button" className={`planet-control planet-${planet.className}`} aria-label={`Explorar planeta ${planet.name}`} aria-expanded={selected === planet.id} aria-controls="planet-information" onClick={event => choose(planet.id, event.currentTarget)}><span className="planet-sphere" aria-hidden="true"><CelPlanet palette={planet.className} ringed={planet.id === 'godot'}/></span><span className="planet-label">{planet.name}</span></button>)}
+        <button className="game-control" type="button" aria-label="Jugar al minijuego espacial" onClick={event => { const opener = event.currentTarget; import("../../game/launch.js").then(game => game.openGame(opener)); }}><FiPlay aria-hidden="true"/>Jugar</button>
         <button className={`rocket-control ${tour !== null ? "rocket-launched" : ""}`} type="button" aria-label="Iniciar recorrido de proyectos" onClick={event => { trigger.current = event.currentTarget; visit(0); }}><Rocket/><span>Iniciar recorrido</span></button>
       </div>
     </div>

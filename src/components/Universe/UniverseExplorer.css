@@ -90,3 +90,5 @@
 @media(prefers-reduced-motion:reduce) { .universe-world { transform:translate(var(--pan-x,0px),var(--pan-y,0px)) scale(var(--scene-zoom,1)); } }
 @media(max-width:600px) { .universe-scene { height:520px; }.planet-ringed { top:157px; }.planet-amber { top:120px; } }
 @media(max-width:600px) { .rocket-control { width:110px;left:4%; }.rocket-control span { max-width:105px;text-align:center;line-height:1.5; } }
+.game-control { position:absolute;right:calc(5% + 120px);bottom:24px;min-width:44px;min-height:44px;padding:8px 14px;display:flex;align-items:center;gap:6px;border:var(--outline);border-radius:8px;background:var(--accent);color:var(--ink);font:800 13px var(--mono);box-shadow:var(--shadow); }
+@media(max-width:600px) { .game-control { right:4%;bottom:150px; } }
