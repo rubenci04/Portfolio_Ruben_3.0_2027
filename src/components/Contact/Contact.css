@@ -2,8 +2,9 @@
   padding-block: 20px 88px;
 }
 .contact-panel {
-  border: 1px solid var(--line);
-  background: linear-gradient(120deg, #172b38, #111e2f);
+  border: var(--outline-large);
+  background: var(--surface);
+  box-shadow: var(--shadow);
   border-radius: 16px;
   padding: 28px;
   display: grid;
@@ -38,8 +39,8 @@
   width: 100%;
   min-width: 0;
   padding: 12px 14px;
-  background: #0b142280;
-  border: 1px solid #405064;
+  background: #101b30;
+  border: var(--outline);
   border-radius: 6px;
   color: var(--text);
   font-size: 13px;

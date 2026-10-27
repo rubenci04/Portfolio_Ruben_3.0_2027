@@ -14,11 +14,19 @@ export default function App() {
   const [category, setCategory] = useState("all");
   const [detailProject, setDetailProject] = useState(null);
   const [spaceEnabled, setSpaceEnabled] = useState(true);
-  const explore = next => {
+  const explore = (next, projectId) => {
     setCategory(next);
     requestAnimationFrame(() => {
-      document.getElementById("catalog")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
-      document.getElementById("catalog-heading")?.focus({ preventScroll: true });
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const catalog = document.getElementById('catalog');
+      const target = projectId ? catalog?.querySelector(`[data-project="${projectId}"]`) : catalog;
+      target?.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'start' });
+      (projectId ? target?.querySelector('h4') : document.getElementById('catalog-heading'))?.focus({ preventScroll: true });
+      if (target && !reduced) {
+        target.classList.remove('teleport-arrival');
+        requestAnimationFrame(() => target.classList.add('teleport-arrival'));
+        setTimeout(() => target.classList.remove('teleport-arrival'), 1100);
+      }
     });
   };
   return (

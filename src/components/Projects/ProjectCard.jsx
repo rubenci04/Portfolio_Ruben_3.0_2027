@@ -7,7 +7,7 @@ export default function ProjectCard({project,index,onOpen,compact=false}) {
   <ProjectCover project={project} index={index}/>
   <div className="project-body">
    <div className="project-meta"><span>{category}</span>{!compact && <span className={`project-status ${project.status}`}><i/>{project.statusLabel || (project.status==='published'?'Publicado':project.status==='archived'?'Trabajo anterior':'En desarrollo')}</span>}</div>
-   <h4>{project.title}</h4>
+   <h4 tabIndex="-1">{project.title}</h4>
    {!compact && <><p>{project.description}</p><div className="tags">{project.technologies.map(tech=><span key={tech}>{tech}</span>)}</div>{project.availability && <p className="availability">{project.availability}</p>}</>}
    <div className="project-links">
     <button type="button" className="project-detail-button" aria-label={`Ver ficha de ${project.title}`} onClick={()=>onOpen(project)}>Ver ficha <FiArrowUpRight/></button>

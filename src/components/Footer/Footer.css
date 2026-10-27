@@ -43,3 +43,6 @@
 .footer-social-links a:hover {
   color: var(--accent);
 }
+.footer-social-links a { border:var(--outline);box-shadow:var(--shadow);background:var(--surface); }
+.footer-social-links a:active { translate:4px 4px;box-shadow:1px 1px 0 var(--ink); }
+@media(prefers-reduced-motion:reduce) { .footer-social-links a:active { translate:none; } }

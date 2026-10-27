@@ -192,3 +192,29 @@ h2 { font-size:clamp(27px,3vw,40px); letter-spacing:-1.5px; }
 .project-card { background:#101d30ed; }
 .skill-group { transition: border-color .2s, transform .2s; }
 .skill-group:hover { border-color:var(--accent); transform:translateY(-3px); }
+/* Cel inks: flat fills, hard edges, 12-frame decoration. */
+:root {
+  --ink:#050b17;
+  --bg:#101b30;
+  --surface:#1b2c46;
+  --text:#fff6e4;
+  --muted:#d0dbee;
+  --accent:#ffd166;
+  --line:#7890ac;
+  --outline:3px solid var(--ink);
+  --outline-large:4px solid var(--ink);
+  --shadow:5px 5px 0 var(--ink);
+  --shadow-raised:8px 8px 0 var(--ink);
+  color:var(--text);
+  background:var(--bg);
+}
+.button { border:var(--outline);box-shadow:var(--shadow);background:var(--surface);transition:transform .16s steps(2),box-shadow .16s steps(2); }
+.button-primary { background:var(--accent);color:var(--ink); }
+.button:hover { background:#2a405c;transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink); }
+.button-primary:hover { background:#ffe39d; }
+.button:active { transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink); }
+.tags span { border:var(--outline);box-shadow:2px 2px 0 var(--ink);background:#253b59;color:var(--text); }
+.eyebrow::before { height:3px; }
+@media(prefers-reduced-motion:reduce) {
+  .button:hover,.button:active,.skill-group:hover { transform:none; }
+}

@@ -161,6 +161,7 @@ const legacyProjects = [
   },
   {
     id: "portfolio",
+    hidden: true,
     title: "Portfolio anterior",
     description: "La versión anterior de este portfolio profesional.",
     technologies: ["React", "Vite", "CSS", "Framer Motion"],

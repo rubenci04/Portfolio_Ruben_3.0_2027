@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { FiMinus, FiPlus, FiRotateCcw, FiX, FiArrowRight } from "react-icons/fi";
 import { featuredProjects } from "../../data/projects";
 import "./UniverseExplorer.css";
+import CelPlanet from './CelPlanet';
 
 const planets = [
   { id: "godot", name: "Godot", title: "Mundos para jugar", copy: "Acción 2D, universos 3D y mecánicas que nacen del código.", className: "ringed" },
   { id: "web", name: "Aplicaciones web", title: "Ideas que resuelven", copy: "Educación, gestión y herramientas para problemas reales.", className: "amber" },
   { id: "android", name: "Android", title: "Software que te acompaña", copy: "Organización cotidiana y entrenamiento en aplicaciones móviles.", className: "ice" },
+  { id: "site", name: "Sitios web", title: "Historias en la web", copy: "Landing pages y sitios para presentar una idea, un negocio o una identidad.", className: "site" },
 ];
 
 function Rocket() {
@@ -30,7 +32,12 @@ export default function UniverseExplorer({ onExploreCategory, onOpenProject, ena
   }, []);
 
   const close = () => { setSelected(null); setTour(null); setZoom(1); trigger.current?.focus(); };
-  const choose = (id, element) => { trigger.current = element; setTour(null); setSelected(id); setZoom(1.15); };
+  const choose = (id, element) => { trigger.current = element; setTour(null); setSelected(id); setZoom(1.15); onExploreCategory(id); };
+  const visit = index => {
+    setSelected(null); setZoom(1); setTour(index);
+    const destination = featuredProjects[index];
+    onExploreCategory(destination.category, destination.id);
+  };
   const move = event => {
     if (!enabled || event.pointerType === "touch" || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const bounds = scene.current.getBoundingClientRect();
@@ -43,15 +50,15 @@ export default function UniverseExplorer({ onExploreCategory, onOpenProject, ena
     <div ref={scene} className={`universe-scene ${enabled ? "" : "scene-static"}`} onPointerMove={move} onPointerLeave={resetPointer} onKeyDown={event => { if (event.key === "Escape") close(); }}>
       <div className="universe-world" style={{ "--scene-zoom": zoom }}>
         <div className="universe-orbit orbit-a" aria-hidden="true"/><div className="universe-orbit orbit-b" aria-hidden="true"/>
-        {planets.map(planet => <button key={planet.id} type="button" className={`planet-control planet-${planet.className}`} aria-label={`Explorar planeta ${planet.name}`} aria-expanded={selected === planet.id} aria-controls="planet-information" onClick={event => choose(planet.id, event.currentTarget)}><span className="planet-sphere" aria-hidden="true"><i className="planet-texture"/>{planet.id === "godot" && <i className="explorer-ring"/>}</span><span className="planet-label">{planet.name}</span></button>)}
-        <button className={`rocket-control ${tour !== null ? "rocket-launched" : ""}`} type="button" aria-label="Iniciar recorrido de proyectos" onClick={event => { trigger.current = event.currentTarget; setSelected(null); setZoom(1); setTour(0); }}><Rocket/><span>Iniciar recorrido</span></button>
+        {planets.map(planet => <button key={planet.id} type="button" className={`planet-control planet-${planet.className}`} aria-label={`Explorar planeta ${planet.name}`} aria-expanded={selected === planet.id} aria-controls="planet-information" onClick={event => choose(planet.id, event.currentTarget)}><span className="planet-sphere" aria-hidden="true"><CelPlanet palette={planet.className} ringed={planet.id === 'godot'}/></span><span className="planet-label">{planet.name}</span></button>)}
+        <button className={`rocket-control ${tour !== null ? "rocket-launched" : ""}`} type="button" aria-label="Iniciar recorrido de proyectos" onClick={event => { trigger.current = event.currentTarget; visit(0); }}><Rocket/><span>Iniciar recorrido</span></button>
       </div>
     </div>
     <div className="universe-toolbar" role="group" aria-label="Controles de la escena"><span>Seleccioná un planeta</span><button type="button" aria-label="Alejar escena" disabled={zoom <= 1} onClick={() => setZoom(value => Math.max(1, +(value - .15).toFixed(2)))}><FiMinus/></button><output aria-label="Zoom de la escena">{Math.round(zoom * 100)}%</output><button type="button" aria-label="Acercar escena" disabled={zoom >= 1.6} onClick={() => setZoom(value => Math.min(1.6, +(value + .15).toFixed(2)))}><FiPlus/></button><button type="button" aria-label="Restablecer escena" onClick={() => { setZoom(1); resetPointer(); }}><FiRotateCcw/></button></div>
     <div id="planet-information" className="universe-information" aria-live="polite">
       {detail && <><div><small>COORDENADA / {detail.name}</small><h3>{detail.title}</h3><p>{detail.copy}</p><button type="button" className="text-link" onClick={() => onExploreCategory(detail.id)}>Ver {detail.name} <FiArrowRight/></button></div><button type="button" className="scene-close" aria-label="Cerrar planeta" onClick={close}><FiX/></button></>}
-      {project && <><div><small>RECORRIDO / {tour + 1} DE {featuredProjects.length}</small><h3>{project.title}</h3><p>{project.description}</p><div className="tour-actions"><button type="button" disabled={tour === 0} onClick={() => setTour(value => value - 1)}>Anterior</button><button type="button" onClick={() => onOpenProject(project)}>Ver ficha</button>{tour < featuredProjects.length - 1 ? <button type="button" onClick={() => setTour(value => value + 1)}>Siguiente <FiArrowRight/></button> : <button type="button" onClick={close}>Terminar</button>}</div></div><button type="button" className="scene-close" aria-label="Detener recorrido" onClick={close}><FiX/></button></>}
-      {!detail && !project && <p className="scene-hint">Tres destinos. Un universo de ideas.<br/>Explorá a tu ritmo con el teclado o el cursor.</p>}
+      {project && <><div><small>RECORRIDO / {tour + 1} DE {featuredProjects.length}</small><h3>{project.title}</h3><p>{project.description}</p><div className="tour-actions"><button type="button" disabled={tour === 0} onClick={() => visit(tour - 1)}>Anterior</button><button type="button" onClick={() => onOpenProject(project)}>Ver ficha</button>{tour < featuredProjects.length - 1 ? <button type="button" onClick={() => visit(tour + 1)}>Siguiente <FiArrowRight/></button> : <button type="button" onClick={close}>Terminar</button>}</div></div><button type="button" className="scene-close" aria-label="Detener recorrido" onClick={close}><FiX/></button></>}
+      {!detail && !project && <p className="scene-hint">Cuatro destinos. Un universo de ideas.<br/>Explorá a tu ritmo con el teclado o el cursor.</p>}
     </div>
   </section>;
 }

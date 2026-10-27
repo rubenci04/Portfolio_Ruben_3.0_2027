@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import SpaceParticles from './SpaceParticles';
+import CelPlanet from '../Universe/CelPlanet';
 import './Background.css';
 export default function Background({ enabled = true }) {
   const ref = useRef(null);
@@ -24,5 +25,5 @@ export default function Background({ enabled = true }) {
     visibility();
     return () => { cancelAnimationFrame(frame); window.removeEventListener('pointermove', move); document.removeEventListener('visibilitychange', visibility); media.removeEventListener('change', reset); };
   }, [enabled]);
-  return <div ref={ref} className="background" aria-hidden="true"><div className="star-parallax">{[0,1,2].map(layer => <div className={`stars stars-${layer}`} key={layer}>{Array.from({length: layer === 0 ? 65 : 28}, (_,i) => <i key={i} style={{left: `${(i * 73.137 + layer * 19) % 100}%`, top: `${(i * 37.719 + layer * 23) % 100}%`, opacity: .3 + (i % 6) / 10}} />)}</div>)}<div className="distant-planet planet-blue"/><div className="distant-planet planet-gold"/></div><SpaceParticles enabled={enabled}/></div>;
+  return <div ref={ref} className="background" aria-hidden="true"><div className="star-parallax">{[0,1,2].map(layer => <div className={`stars stars-${layer}`} key={layer}>{Array.from({length: layer === 0 ? 65 : 28}, (_,i) => <i key={i} style={{left: `${(i * 73.137 + layer * 19) % 100}%`, top: `${(i * 37.719 + layer * 23) % 100}%`}} />)}</div>)}<div className="distant-planet planet-blue"><CelPlanet palette="blue" ringed/></div><div className="distant-planet planet-gold"><CelPlanet palette="amber"/></div></div><SpaceParticles enabled={enabled}/></div>;
 }

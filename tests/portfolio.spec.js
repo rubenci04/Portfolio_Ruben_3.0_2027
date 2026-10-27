@@ -10,7 +10,7 @@ test("renderizado, navegación, accesibilidad estructural y responsive", async (
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "realidad.",
   );
-  await expect(page.locator("#catalog .project-card")).toHaveCount(14);
+  await expect(page.locator("#catalog .project-card")).toHaveCount(13);
   await expect(page.getByRole("link", { name: "Descargar CV" })).toHaveCount(0);
   const integrity = await page.evaluate(() => {
     const ids = [...document.querySelectorAll("[id]")].map(
@@ -54,8 +54,8 @@ test("filtros y acciones disponibles", async ({ page }) => {
     ["Juegos web", 2],
     ["Godot", 3],
     ["Android", 2],
-    ["Sitios web", 4],
-    ["Todos", 14],
+    ["Sitios web", 3],
+    ["Todos", 13],
   ]) {
     await page.getByRole("group", { name: "Filtrar catálogo" }).getByRole("button", { name: label }).click();
     await expect(page.locator("#catalog .project-card")).toHaveCount(count);
@@ -154,7 +154,7 @@ test("movimiento reducido desactiva la animación decorativa", async ({
 test('catálogo original, foto completa y metadatos', async ({ page }) => {
  await page.goto('/');
  await expect(page.getByRole('heading',{level:1})).toHaveText('Las ideasse vuelvenrealidad.');
- for(const title of ['Don Enrique · Gestión del bar','Edu App Contable','Reclutador','Bee Alien 3D','Tucumán Rush','Crochet Match','Ricota Quiz','Estéticars Monteros','Bar Don Enrique','App Ventas y Gestión de Kiosco','Traidores No','Portfolio anterior']) await expect(page.locator('#catalog').getByRole('heading',{name:title,exact:true})).toBeVisible();
+ for(const title of ['Don Enrique · Gestión del bar','Edu App Contable','Reclutador','Bee Alien 3D','Tucumán Rush','Crochet Match','Ricota Quiz','Estéticars Monteros','Bar Don Enrique','App Ventas y Gestión de Kiosco','Traidores No']) await expect(page.locator('#catalog').getByRole('heading',{name:title,exact:true})).toBeVisible();
  await expect(page.getByRole('heading',{name:'App Python',exact:true})).toHaveCount(0);
  await expect(page.getByRole('heading',{name:'Emprendimiento de Tejido',exact:true})).toHaveCount(0);
  await expect(page.locator('.portrait-frame')).toHaveCSS('border-radius','50%');
@@ -167,7 +167,7 @@ test('catálogo original, foto completa y metadatos', async ({ page }) => {
  await expect(page.locator('#catalog [data-project="kiosco"] a')).toHaveCount(0);
  await expect(page.locator('#catalog [data-project="traidores-no"] a')).toHaveAttribute('href','https://traidoresno.vercel.app/');
  await expect(page.locator('.stars')).toHaveCount(3);
- await expect(page.locator('.planet-control')).toHaveCount(3);
+ await expect(page.locator('.planet-control')).toHaveCount(4);
  await page.emulateMedia({reducedMotion:'reduce'});
  await expect(page.locator('.stars').first()).toHaveCSS('animation-name','none');
 });

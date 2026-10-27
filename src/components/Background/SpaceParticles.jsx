@@ -37,14 +37,24 @@ export default function SpaceParticles({ enabled = true }) {
         star.oy += ((distance ? dy / distance * offset : 0) - star.oy) * easing;
         const x = star.x + star.ox;
         const y = star.y + star.oy;
-        const alpha = .35 + .3 * (1 + Math.sin(elapsed * .8 + star.phase)) / 2;
-        context.fillStyle = `rgba(${star.color}, ${alpha + force * .3})`;
+        context.fillStyle = `rgb(${star.color})`;
         context.beginPath();
-        context.arc(x, y, star.radius + force * .8, 0, Math.PI * 2);
+        const radius = star.radius + force * 2;
+        if (star.sparkle) {
+          context.moveTo(x, y - radius * 3);
+          context.lineTo(x + radius * .6, y - radius * .6);
+          context.lineTo(x + radius * 3, y);
+          context.lineTo(x + radius * .6, y + radius * .6);
+          context.lineTo(x, y + radius * 3);
+          context.lineTo(x - radius * .6, y + radius * .6);
+          context.lineTo(x - radius * 3, y);
+          context.lineTo(x - radius * .6, y - radius * .6);
+          context.closePath();
+        } else context.arc(x, y, radius, 0, Math.PI * 2);
         context.fill();
         if (force > .15 && connections < 6) {
-          context.strokeStyle = `rgba(158, 205, 238, ${force * .22})`;
-          context.lineWidth = .6;
+          context.strokeStyle = '#658da9';
+          context.lineWidth = 1;
           context.beginPath();
           context.moveTo(pointer.x, pointer.y);
           context.lineTo(x, y);
@@ -60,12 +70,8 @@ export default function SpaceParticles({ enabled = true }) {
         meteor.life += delta;
         meteor.x += delta * 260;
         meteor.y += delta * 110;
-        const opacity = Math.max(0, Math.sin(meteor.life / 1.4 * Math.PI));
-        const trail = context.createLinearGradient(meteor.x - 70, meteor.y - 30, meteor.x, meteor.y);
-        trail.addColorStop(0, "rgba(167,203,241,0)");
-        trail.addColorStop(1, `rgba(240,222,180,${opacity * .7})`);
-        context.strokeStyle = trail;
-        context.lineWidth = 1.4;
+        context.strokeStyle = '#ffe098';
+        context.lineWidth = 3;
         context.beginPath();
         context.moveTo(meteor.x - 70, meteor.y - 30);
         context.lineTo(meteor.x, meteor.y);
@@ -110,6 +116,7 @@ export default function SpaceParticles({ enabled = true }) {
         y: ((i * .41421356237 + .13) % 1) * height,
         speed: 5 + i % 5 * 2,
         radius: .7 + i % 3 * .35,
+        sparkle: i % 7 === 0,
         phase: i * 1.7,
         vx: -2 + i % 5,
         color: ["196,224,255", "249,221,174", "184,218,225"][i % 3],

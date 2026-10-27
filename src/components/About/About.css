@@ -13,9 +13,9 @@
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #e6c47799;
-  background: radial-gradient(circle at 35% 25%, #294758, #101c30 75%);
-  box-shadow: 0 0 0 9px #9bc9e508, 0 0 0 10px #9bc9e52a, 0 18px 65px #0004;
+  border: var(--outline-large);
+  background: #294758;
+  box-shadow: 8px 8px 0 var(--ink);
 }
 .portrait-frame img {
   width: 100%;

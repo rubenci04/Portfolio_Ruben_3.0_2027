@@ -3,14 +3,14 @@
 .project-media > .project-cover,.project-media > .gameplay-preview { height:auto; min-height:0; aspect-ratio:var(--cover-ratio,16/9); }
 .project-media .gameplay-preview > .project-cover { height:100%; min-height:0; }
 img.project-cover.real-cover { padding:0; object-fit:contain; background:#132739; width:100%; height:auto; aspect-ratio:16/9; }
-.cover-space { background:radial-gradient(ellipse at 75% 30%,#445f70,#192b43 60%); }
-.cover-mobile { background:radial-gradient(ellipse at 80% 20%,#314752,#142437 70%); }
-.cover-android-gym { background:radial-gradient(ellipse at 20% 30%,#45413c,#182238 70%); }
+.cover-space { background:var(--scene-base); }
+.cover-mobile { background:var(--scene-base); }
+.cover-android-gym { background:var(--scene-base); }
 .mobile-showcase { display:flex; justify-content:center; align-items:center; min-width:0; padding:5px; }
-.phone-frame { position:relative; width:150px; border:5px solid #07111f; outline:1px solid #a8c4cd69; border-radius:24px; overflow:hidden; background:#12243a; box-shadow:12px 15px 30px #0004; aspect-ratio:9/19.5; }
+.phone-frame { position:relative; width:150px; border:5px solid #07111f; outline:1px solid #a8c4cd69; border-radius:24px; overflow:hidden; background:#12243a; box-shadow:var(--shadow); aspect-ratio:9/19.5; }
 .phone-frame > img { width:100%; height:100%; object-fit:contain; display:block; }
 .phone-speaker { position:absolute; z-index:2; top:6px; left:36%; width:28%; height:4px; border-radius:5px; background:#070e1b; }
-.phone-concept { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:14px; background:radial-gradient(circle at 30% 20%,#81a8af44,transparent 60%); }
+.phone-concept { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:14px; background:#243955; }
 .phone-concept > span { color:#e0c484; font-size:20px; }.phone-concept b { font:700 28px var(--mono);color:#d4e5ea; }.phone-concept small { font:6px var(--mono);letter-spacing:1px;color:var(--muted); }
 .cover-mobile .mobile-showcase { position:absolute; top:32px; bottom:13px; left:0;right:0; }
 .cover-mobile .phone-frame { height:100%; width:auto; transform:rotate(7deg); }.cover-mobile .cover-caption { font-size:7px; }
@@ -41,3 +41,17 @@ img.project-cover.mobile-gym-scientific { background:#111111; }
 .project-videos video { display:block;width:100%;max-height:65dvh;object-fit:contain;background:#080f1e;border-radius:8px; }
 .videos-mobile video { aspect-ratio:9/16;width:min(100%,320px);max-height:none;margin-inline:auto; }
 .project-videos figcaption { color:var(--muted);font-size:12px;margin-top:8px;text-align:center; }
+
+/* Frames extend the same ink language to real material without altering it. */
+img.project-cover.real-cover { border:var(--outline);border-radius:8px;box-shadow:3px 3px 0 var(--ink); }
+.project-media { padding:5px 7px 8px 5px; }
+.project-gallery > .gallery-main,.project-videos video { border:var(--outline);box-shadow:var(--shadow); }
+.gallery-thumbnails { padding:10px 3px 14px;gap:12px; }
+.gallery-thumbnails button { border:var(--outline);box-shadow:3px 3px 0 var(--ink);background:#20334f; }
+.gallery-thumbnails button[aria-pressed="true"] { border-color:var(--ink);background:var(--accent);outline:2px solid var(--accent);outline-offset:2px; }
+.gallery-controls button,.preview-toggle { border:var(--outline);box-shadow:3px 3px 0 var(--ink);background:#243955;color:var(--text); }
+.gallery-controls button:disabled { opacity:1;background:#29374b;color:#b4c0d2; }
+.gallery-controls button:active:not(:disabled),.gallery-thumbnails button:active,.preview-toggle:active { translate:3px 3px;box-shadow:none; }
+.phone-frame { border-color:var(--ink);outline:none;box-shadow:var(--shadow); }
+.phone-concept { background:#243955; }
+@media(prefers-reduced-motion:reduce) { .gallery-controls button:active,.gallery-thumbnails button:active,.preview-toggle:active { translate:none; } }
