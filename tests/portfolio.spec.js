@@ -10,7 +10,7 @@ test("renderizado, navegación, accesibilidad estructural y responsive", async (
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "realidad.",
   );
-  await expect(page.locator(".project-card")).toHaveCount(12);
+  await expect(page.locator("#catalog .project-card")).toHaveCount(16);
   await expect(page.getByRole("link", { name: "Descargar CV" })).toHaveCount(0);
   const integrity = await page.evaluate(() => {
     const ids = [...document.querySelectorAll("[id]")].map(
@@ -29,7 +29,7 @@ test("renderizado, navegación, accesibilidad estructural y responsive", async (
     .getByRole("link", { name: "Explorar proyectos", exact: true })
     .click();
   await expect(page).toHaveURL(/#projects$/);
-  await expect(page.locator(".previous-projects .project-card")).toHaveCount(5);
+  await expect(page.locator(".featured-projects .project-card")).toHaveCount(6);
 
   expect(errors).toEqual([]);
 
@@ -50,15 +50,16 @@ test("renderizado, navegación, accesibilidad estructural y responsive", async (
 test("filtros y acciones disponibles", async ({ page }) => {
   await page.goto("/");
   for (const [label, count] of [
-    ["Aplicaciones web", 2],
-    ["Videojuegos web", 2],
-    ["Godot Engine", 3],
-    ["Trabajos anteriores", 5],
-    ["Todos", 12],
+    ["Aplicaciones web", 4],
+    ["Juegos web", 2],
+    ["Godot", 3],
+    ["Android", 2],
+    ["Sitios web", 4],
+    ["Todos", 16],
   ]) {
-    await page.getByRole("button", { name: label }).click();
-    await expect(page.locator(".project-card")).toHaveCount(count);
-    await expect(page.getByRole("button", { name: label })).toHaveAttribute(
+    await page.getByRole("group", { name: "Filtrar catálogo" }).getByRole("button", { name: label }).click();
+    await expect(page.locator("#catalog .project-card")).toHaveCount(count);
+    await expect(page.getByRole("group", { name: "Filtrar catálogo" }).getByRole("button", { name: label })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
@@ -66,10 +67,10 @@ test("filtros y acciones disponibles", async ({ page }) => {
       count + " proyectos",
     );
   }
-  await expect(page.locator('[data-project="edu-app"] a')).toHaveCount(0);
-  await expect(page.locator('[data-project="crochet-match"] a')).toHaveCount(0);
-  await expect(page.locator('[data-project="bee-alien"] a')).toHaveCount(1);
-  await expect(page.locator('[data-project="reclutador"] a')).toHaveCount(2);
+  await expect(page.locator('#catalog [data-project="edu-app"] a')).toHaveCount(0);
+  await expect(page.locator('#catalog [data-project="crochet-match"] a')).toHaveCount(0);
+  await expect(page.locator('#catalog [data-project="bee-alien"] a')).toHaveCount(1);
+  await expect(page.locator('#catalog [data-project="reclutador"] a')).toHaveCount(2);
 });
 
 test("menú mediante teclado y cierre al navegar", async ({ page }) => {
@@ -144,7 +145,7 @@ test("movimiento reducido desactiva la animación decorativa", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.locator(".core-object")).toHaveCSS(
+  await expect(page.locator(".planet-sphere").first()).toHaveCSS(
     "animation-name",
     "none",
   );
@@ -153,20 +154,20 @@ test("movimiento reducido desactiva la animación decorativa", async ({
 test('catálogo original, foto completa y metadatos', async ({ page }) => {
  await page.goto('/');
  await expect(page.getByRole('heading',{level:1})).toHaveText('Las ideasse vuelvenrealidad.');
- for(const title of ['Don Enrique · Gestión del bar','Edu App Contable','Reclutador','Bee Alien 3D','Tucumán Rush','Crochet Match','Ricota Quiz','Estéticars Monteros','Bar Don Enrique','App Ventas y Gestión de Kiosco','Traidores No','Portfolio anterior']) await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible();
- await expect(page.getByRole('heading',{name:'App Python',exact:true})).toHaveCount(0);
- await expect(page.getByRole('heading',{name:'Emprendimiento de Tejido',exact:true})).toHaveCount(0);
+ for(const title of ['Don Enrique · Gestión del bar','Edu App Contable','Reclutador','Bee Alien 3D','Tucumán Rush','Crochet Match','Ricota Quiz','Estéticars Monteros','Bar Don Enrique','App Ventas y Gestión de Kiosco','Traidores No','Portfolio anterior']) await expect(page.locator('#catalog').getByRole('heading',{name:title,exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'App Python',exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Emprendimiento de Tejido',exact:true})).toBeVisible();
  await expect(page.locator('.portrait-frame')).toHaveCSS('border-radius','50%');
  await expect(page.locator('html')).toHaveAttribute('lang','es-AR');
  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content',/Tucumán/);
  await expect(page.locator('#about img')).toHaveCSS('object-fit','contain');
  await expect(page.getByRole('link',{name:'Abrir acceso de Don Enrique · Gestión del bar'})).toHaveAttribute('href','https://bar-app-web.onrender.com/');
- await expect(page.locator('[data-project="bar-gestion"]')).toContainText('Requiere usuario y contraseña');
- await expect(page.locator('[data-project="kiosco"] a')).toHaveCount(0);
- await expect(page.locator('[data-project="traidores-no"] a')).toHaveAttribute('href','https://traidoresno.vercel.app/');
+ await expect(page.locator('#catalog [data-project="bar-gestion"]')).toContainText('Requiere usuario y contraseña');
+ await expect(page.locator('#catalog [data-project="kiosco"] a')).toHaveCount(0);
+ await expect(page.locator('#catalog [data-project="traidores-no"] a')).toHaveAttribute('href','https://traidoresno.vercel.app/');
  await expect(page.locator('.stars')).toHaveCount(3);
- await expect(page.locator('.hero-planet, .distant-planet')).toHaveCount(3);
+ await expect(page.locator('.planet-control')).toHaveCount(3);
  await page.emulateMedia({reducedMotion:'reduce'});
  await expect(page.locator('.stars').first()).toHaveCSS('animation-name','none');
 });

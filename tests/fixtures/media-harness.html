@@ -1,0 +1,13 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Media component test harness</title></head><body style="margin:0;background:#0b1422;color:white"><div id="fixture"></div><script type="module">
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import GameplayPreview from '/src/components/Media/GameplayPreview.jsx';
+import ProjectGallery from '/src/components/Media/ProjectGallery.jsx';
+import ProjectCover from '/src/components/Media/ProjectCover.jsx';
+const root=createRoot(document.getElementById('fixture'));
+window.installTestMedia=(src)=>root.render(React.createElement('main',null,
+ ...['A','B'].map(title=>React.createElement('div',{key:title,style:{width:290,margin:15}},React.createElement(GameplayPreview,{title,media:{previewWebm:src}},React.createElement('div',{style:{height:160}},'Test fixture '+title)))),
+ React.createElement('div',{style:{height:1800}},'Scroll target')));
+window.installTestGallery=()=>root.render(React.createElement(ProjectGallery,{project:{title:'Fixture',category:'android',media:{screenshots:[{src:'/src/assets/cards_images/portfolio.webp',alt:'Fixture one'},{src:'/src/assets/cards_images/esteticars.webp',alt:'Fixture two'}]}}}));
+window.installBrokenCover=()=>root.render(React.createElement(ProjectCover,{project:{id:'fixture',title:'Fixture',category:'web',media:{cover:'/fixture-absent.webp',screenshots:[]}}}));
+</script></body></html>

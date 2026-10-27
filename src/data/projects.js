@@ -1,3 +1,5 @@
+import python from "../assets/cards_images/app-python.webp";
+import tejido from "../assets/cards_images/tejido.webp";
 import kiosco from "../assets/cards_images/kiosco.webp";
 import esteticars from "../assets/cards_images/esteticars.webp";
 import donenrique from "../assets/cards_images/donenrique.webp";
@@ -5,15 +7,16 @@ import portfolio from "../assets/cards_images/portfolio.webp";
 import barGestion from "../assets/cards_images/bar-gestion-login.webp";
 
 export const categories = [
-  { id: "all", label: "Todos" },
-  { id: "web", label: "Aplicaciones web" },
-  { id: "web-game", label: "Videojuegos web" },
-  { id: "godot", label: "Godot Engine" },
-  { id: "archive", label: "Trabajos anteriores" },
+ { id: 'all', label: 'Todos' },
+ { id: 'godot', label: 'Godot' },
+ { id: 'web-game', label: 'Juegos web' },
+ { id: 'web', label: 'Aplicaciones web' },
+ { id: 'android', label: 'Android' },
+ { id: 'site', label: 'Sitios web' },
 ];
 // Demo links confirm publication. Other release states remain conservative until owner confirmation.
 // image and video are optional real assets; null selects an explicitly abstract CSS cover.
-export const projects = [
+const currentProjects = [
   {
     id: "edu-app",
     title: "Edu App Contable",
@@ -128,7 +131,7 @@ export const projects = [
     repository: "https://github.com/rubenci04/ricota_quiz",
   },
 ];
-export const archivedProjects = [
+const legacyProjects = [
   {
     id: "kiosco",
     title: "App Ventas y Gestión de Kiosco",
@@ -167,22 +170,50 @@ export const archivedProjects = [
     repository: "https://github.com/rubenci04/portfolio_web",
   },
 ];
-archivedProjects.push({
+legacyProjects.push({
  id: 'traidores-no', title: 'Traidores No', category: 'archive',
  description: 'Sitio para una banda de rock argentino. Proyecto universitario colaborativo con Shaiel Ferreyra y Delfina Diaz.',
  technologies: ['React', 'JavaScript', 'CSS'], image: null, demo: 'https://traidoresno.vercel.app/',
  cover: 'music', coverLabel: 'COLABORACIÓN / ROCK', coverTitle: ['Traidores', 'NO'],
 });
-archivedProjects.forEach(project => {
- project.category = 'archive';
- project.status = 'archived';
- project.availability ??= project.demo ? 'Enlace público' : 'Sin demo pública';
-});
-export const allProjects = [...projects, ...archivedProjects];
-// Optional future media: screenshots, gameplay, gallery, detailUrl, windowsBuild, html5Build.
-allProjects.forEach(project => { project.media = { screenshots: [], gameplay: null, gallery: [], detailUrl: null, windowsBuild: null, html5Build: null }; });
+
+const androidProjects = [
+ { id:'ostoappar', title:'OstoAppAR', category:'android',
+   description:'Aplicación Android orientada al registro de cuidados de ostomía y al control del inventario de insumos. Una herramienta para organizar una necesidad cotidiana real.',
+   technologies:['React Native','Expo','AsyncStorage'], status:'functional', statusLabel:'Funcional · APK',
+   editorial:{releaseStatus:'functional-apk',confirmationRequired:false,confirmedBy:'owner',confirmedOn:'2026-10-27'},
+   cover:'android-osto', coverLabel:'ANDROID / ORGANIZACIÓN PERSONAL', coverTitle:['Cuidar.','Registrar.','Organizar.'],
+   repository:'https://github.com/rubenci04/OstoAppAR', demo:null,
+   features:['Inventario de bolsas y discos con persistencia local.','Registros diarios e historial.','Recordatorios y exportación de reportes PDF.'],
+   sourceNotes:['package.json','src/screens/TrackerScreen.js','src/utils/pdfGenerator.js'],
+ },
+ { id:'gym-scientific',title:'Gym Scientific App',category:'android',
+   description:'Aplicación Android para planificar rutinas, registrar entrenamientos y consultar el progreso. Incluye biblioteca de ejercicios y recordatorios de hidratación.',
+   technologies:['Flutter','Dart','Hive'],status:'functional',statusLabel:'Funcional · APK',
+   editorial:{releaseStatus:'functional-apk',confirmationRequired:false,confirmedBy:'owner',confirmedOn:'2026-10-27'},
+   cover:'android-gym',coverLabel:'ANDROID / ENTRENAMIENTO',coverTitle:['Planificar.','Entrenar.','Progresar.'],
+   repository:'https://github.com/rubenci04/gym_scientific_app', demo:null,
+   features:['Rutinas editables y biblioteca de ejercicios.','Registro de sesiones e historial de progreso.','Persistencia local y notificaciones de hidratación.'],
+   sourceNotes:['pubspec.yaml','lib/screens/workout_screen.dart','lib/screens/progress_screen.dart','lib/services/notification_service.dart'],
+ },
+];
+legacyProjects.push(
+ {id:'python',title:'App Python',description:'Aplicación de escritorio desarrollada con Python y Tkinter. Trabajo conservado del catálogo original.', technologies:['Python','Tkinter'],image:python,demo:null,status:'archived',category:'desktop',categoryLabel:'Aplicación de escritorio',availability:'Sin demo pública verificada.'},
+ {id:'tejido',title:'Emprendimiento de Tejido',description:'Proyecto de comercio electrónico para un emprendimiento de tejidos a crochet, en desarrollo.',technologies:['React','Node.js','Express','MongoDB'],image:tejido,demo:null,status:'development',category:'web'},
+);
+const defaultMedia = {cover:null,poster:null,screenshots:[],previewVideo:null,previewWebm:null,aspectRatio:'16 / 9',mediaStatus:'pending'};
+function normalize(project) {
+ const category = project.category === 'archive' || !project.category ? (project.id==='kiosco'?'web':'site') : project.category;
+ const status=project.status || 'archived';
+ return {...project,category,categories:[category],status,
+  features:project.features || [],
+  media:{...defaultMedia,cover:project.image || null,mediaStatus:project.image?'available':'pending',...project.media},
+ };
+}
+export const allProjects = [...currentProjects,...androidProjects,...legacyProjects].map(normalize);
+export const featuredIds = ['bee-alien','tucuman-rush','reclutador','crochet-match','ricota-quiz','edu-app'];
+export const featuredProjects = featuredIds.map(id=>allProjects.find(project=>project.id===id));
+export const projects = allProjects;
 export function filterProjects(category) {
-  return category === "all"
-    ? allProjects
-    : allProjects.filter((project) => project.category === category);
+ return category==='all' ? allProjects : allProjects.filter(project=>project.categories.includes(category));
 }

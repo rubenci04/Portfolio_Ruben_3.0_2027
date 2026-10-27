@@ -1,0 +1,53 @@
+{
+  "checkedOn": "2026-10-27",
+  "releaseStatus": {
+    "both": "functional-apk",
+    "source": "Explicit owner confirmation in chat",
+    "deviceTesting": false,
+    "publicDownloadsVerified": false
+  },
+  "repositories": [
+    {
+      "repo": "rubenci04/OstoAppAR",
+      "treeSha": "24e4f7ae591335737944e9c684f9f4d5b2897ae3",
+      "files": [
+        "package.json",
+        "src/screens/TrackerScreen.js",
+        "src/utils/pdfGenerator.js"
+      ],
+      "verifiedFeatures": [
+        "Local supply inventory",
+        "Daily logs and history",
+        "Notifications",
+        "PDF export"
+      ],
+      "stack": [
+        "React Native",
+        "Expo",
+        "AsyncStorage"
+      ]
+    },
+    {
+      "repo": "rubenci04/gym_scientific_app",
+      "treeSha": "734ab97f61837aae9f6723e5e822d95ce5c10cdc",
+      "files": [
+        "pubspec.yaml",
+        "lib/screens/workout_screen.dart",
+        "lib/screens/progress_screen.dart",
+        "lib/services/notification_service.dart",
+        "lib/services/routine_repository.dart"
+      ],
+      "verifiedFeatures": [
+        "Routines and exercise library",
+        "Workout history and progress",
+        "Local persistence",
+        "Hydration notifications"
+      ],
+      "stack": [
+        "Flutter",
+        "Dart",
+        "Hive"
+      ]
+    }
+  ]
+}

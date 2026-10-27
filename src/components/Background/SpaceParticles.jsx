@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 // A small foreground layer; CSS keeps the distant star field visible without JS.
-export default function SpaceParticles() {
+export default function SpaceParticles({ enabled = true }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -17,13 +17,16 @@ export default function SpaceParticles() {
     let frame = 0;
     let previous = 0;
     let elapsed = 0;
+    let nextMeteor = 8;
+    let meteor = null;
 
     function paint(delta = 0) {
-      const interactive = pointer.active && fine.matches && !reduced.matches;
+      const interactive = enabled && pointer.active && fine.matches && !reduced.matches;
       context.clearRect(0, 0, width, height);
       let connections = 0;
       for (const star of stars) {
-        star.y = (star.y - delta * star.speed + height) % height;
+        star.x = (star.x + delta * (star.vx + Math.sin(elapsed * .3 + star.phase) * 2) + width) % width;
+        star.y = (star.y - delta * star.speed * .7 + height) % height;
         const dx = star.x - pointer.x;
         const dy = star.y - pointer.y;
         const distance = Math.hypot(dx, dy);
@@ -35,7 +38,7 @@ export default function SpaceParticles() {
         const x = star.x + star.ox;
         const y = star.y + star.oy;
         const alpha = .35 + .3 * (1 + Math.sin(elapsed * .8 + star.phase)) / 2;
-        context.fillStyle = `rgba(196, 224, 255, ${alpha + force * .3})`;
+        context.fillStyle = `rgba(${star.color}, ${alpha + force * .3})`;
         context.beginPath();
         context.arc(x, y, star.radius + force * .8, 0, Math.PI * 2);
         context.fill();
@@ -49,10 +52,30 @@ export default function SpaceParticles() {
           connections++;
         }
       }
+      if (delta && elapsed >= nextMeteor) {
+        meteor = { x: width * .17, y: height * .12, life: 0 };
+        nextMeteor = elapsed + 14;
+      }
+      if (meteor && delta) {
+        meteor.life += delta;
+        meteor.x += delta * 260;
+        meteor.y += delta * 110;
+        const opacity = Math.max(0, Math.sin(meteor.life / 1.4 * Math.PI));
+        const trail = context.createLinearGradient(meteor.x - 70, meteor.y - 30, meteor.x, meteor.y);
+        trail.addColorStop(0, "rgba(167,203,241,0)");
+        trail.addColorStop(1, `rgba(240,222,180,${opacity * .7})`);
+        context.strokeStyle = trail;
+        context.lineWidth = 1.4;
+        context.beginPath();
+        context.moveTo(meteor.x - 70, meteor.y - 30);
+        context.lineTo(meteor.x, meteor.y);
+        context.stroke();
+        if (meteor.life >= 1.4) meteor = null;
+      }
     }
 
     function tick(time) {
-      if (document.hidden || reduced.matches) { frame = 0; return; }
+      if (!enabled || document.hidden || reduced.matches) { frame = 0; return; }
       if (!previous) previous = time;
       const delta = (time - previous) / 1000;
       // Limit drawing to 30 fps and avoid jumps after resuming the tab.
@@ -69,7 +92,7 @@ export default function SpaceParticles() {
       cancelAnimationFrame(frame);
       frame = 0;
       previous = 0;
-      if (reduced.matches) {
+      if (!enabled || reduced.matches) {
         pointer.active = false;
         paint();
       } else if (!document.hidden) frame = requestAnimationFrame(tick);
@@ -88,6 +111,8 @@ export default function SpaceParticles() {
         speed: 5 + i % 5 * 2,
         radius: .7 + i % 3 * .35,
         phase: i * 1.7,
+        vx: -2 + i % 5,
+        color: ["196,224,255", "249,221,174", "184,218,225"][i % 3],
         ox: 0, oy: 0,
       }));
       paint();
@@ -117,7 +142,7 @@ export default function SpaceParticles() {
       document.removeEventListener("visibilitychange", sync);
       reduced.removeEventListener("change", sync);
     };
-  }, []);
+  }, [enabled]);
 
   return <canvas ref={canvasRef} className="space-particles" aria-hidden="true" />;
 }

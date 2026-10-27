@@ -1,0 +1,46 @@
+.universe { min-width:0; width:100%; border:1px solid #779eb02d; border-radius:20px; background:radial-gradient(ellipse at 48% 35%,#2b61721f,transparent 68%); overflow:hidden; }
+.universe-heading { display:flex; align-items:center; justify-content:space-between; padding:17px 18px; gap:10px; font:8px var(--mono); color:var(--muted); letter-spacing:1px; }
+.universe-heading button { border:0; background:transparent; color:var(--muted); font:10px var(--mono); min-height:32px; }
+.universe-scene { position:relative; height:350px; overflow:hidden; touch-action:pan-y; }
+.universe-world { position:absolute; inset:0; transform:translate(var(--look-x,0px),var(--look-y,0px)) scale(var(--scene-zoom,1)); transition:transform .6s ease-out; }
+.universe-orbit { position:absolute; width:88%; height:65%; left:6%; top:15%; border:1px solid #c6dce929; border-radius:50%; transform:rotate(-28deg); pointer-events:none; }
+.orbit-b { width:75%; height:45%; left:12%; top:27%; transform:rotate(27deg); border-style:dashed; border-color:#e6be6b22; }
+.planet-control { position:absolute; border:0; color:var(--text); background:transparent; padding:0; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.planet-sphere { display:block; position:relative; border-radius:50%; width:100%; aspect-ratio:1; background:radial-gradient(circle at 27% 22%,#c6d9ce,#729b9c 14%,#355a70 35%,#142a44 62%,#080e1c 83%); box-shadow:inset 4px 2px 9px #d0e7da55,-5px -3px 20px #82c1cc33,18px 18px 35px #0005; animation:celestial-float 14s ease-in-out infinite alternate; }
+.planet-texture { position:absolute; inset:0; border-radius:50%; overflow:hidden; opacity:.24; background:repeating-linear-gradient(14deg,transparent 0 18%,#e0f6ff22 20% 23%,transparent 26% 34%); animation:atmosphere-turn 40s ease-in-out infinite alternate; }
+.planet-ringed { width:170px; left:calc(50% - 85px); top:65px; z-index:2; }
+.explorer-ring { position:absolute; width:170%; height:40%; left:-35%; top:31%; border:9px solid #b8c4ab8f; border-bottom-color:#a6c1c8ab; border-radius:50%; transform:rotate(-28deg); box-shadow:0 0 0 5px #b9d8df10,0 0 0 10px #b9d8df1a; }
+.planet-amber { width:62px; right:10%; top:20px; }
+.planet-amber .planet-sphere { background:radial-gradient(circle at 25% 23%,#f8d7a3,#a27a51 35%,#282031 70%,#090f1e 90%); animation-duration:19s; }
+.planet-ice { width:76px; left:9%; bottom:24px; }
+.planet-ice .planet-sphere { background:radial-gradient(circle at 23% 22%,#a5dce0,#387384 30%,#183043 65%,#080f1e 85%); animation-duration:23s; }
+.planet-label { font:10px var(--mono); padding:4px 7px; border-radius:4px; background:#081323d9; white-space:nowrap; position:relative; }
+.planet-control:hover .planet-label,.planet-control[aria-expanded=true] .planet-label { color:var(--accent); }
+.planet-control:focus-visible { outline-offset:14px; border-radius:50%; }
+.rocket-control { position:absolute; right:9%; bottom:22px; padding:8px; display:flex; align-items:center; flex-direction:column; border:0; background:transparent; color:var(--accent); font:9px var(--mono); gap:6px; }
+.rocket-control svg { width:56px; height:56px; transition:transform .25s; animation:rocket-idle 5s ease-in-out infinite alternate; }
+.rocket-control:hover svg { transform:translate(4px,-4px); }
+.rocket-flame { transform-origin:30px 70px; animation:thruster .5s ease-in-out infinite alternate; }
+.rocket-launched svg { animation:rocket-launch .8s ease-out; }
+.universe-toolbar { display:flex; align-items:center; justify-content:flex-end; gap:7px; padding:12px 15px; border-top:1px solid var(--line); }
+.universe-toolbar > span { margin-right:auto; font:9px var(--mono); color:var(--muted); }
+.universe-toolbar output { font:10px var(--mono); width:38px; text-align:center; }
+.universe-toolbar button,.scene-close { min-width:36px; min-height:36px; border:1px solid var(--line); border-radius:6px; background:#101e30; color:var(--text); }
+.universe button:disabled { opacity:.35; cursor:default; }
+.universe-information { position:relative; min-height:139px; padding:20px; border-top:1px solid var(--line); background:#0b1726b0; }
+.universe-information > div { padding-right:26px; }
+.universe-information small { font:8px var(--mono); color:var(--accent); letter-spacing:1px; }
+.universe-information h3 { font-size:15px; margin:9px 0; }
+.universe-information p { font-size:12px; }
+.universe-information .text-link { border:0; padding:12px 0 0; background:transparent; color:var(--accent); }
+.scene-close { position:absolute; top:16px; right:12px; }
+.scene-hint { text-align:center; padding:13px 0; }
+.tour-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:15px; }
+.tour-actions button { padding:8px 10px; min-height:36px; border:1px solid var(--line); border-radius:5px; background:#16273b; color:var(--text); font-size:11px; }
+.scene-static * { animation-play-state:paused!important; }
+@keyframes atmosphere-turn { to { transform:rotate(12deg); } }
+@keyframes rocket-idle { to { translate:0 -5px; } }
+@keyframes thruster { to { opacity:.5; scale:.85; } }
+@keyframes rocket-launch { 45% { transform:translate(25px,-25px); } }
+@media(max-width:600px) { .universe-scene { height:300px; } .planet-ringed { width:135px; left:calc(50% - 67.5px); top:65px; } .planet-amber { right:9%;width:48px; } .planet-ice { left:9%;width:58px; } .rocket-control { right:4%;bottom:20px; } .universe-toolbar button { min-width:44px; min-height:44px; } .universe-toolbar { gap:4px;padding:10px; } .universe-toolbar > span { font-size:8px; max-width:90px; } .scene-close { min-width:44px;min-height:44px; } }
+@media(prefers-reduced-motion:reduce) { .universe-world { transform:scale(var(--scene-zoom,1)); transition:none; } }

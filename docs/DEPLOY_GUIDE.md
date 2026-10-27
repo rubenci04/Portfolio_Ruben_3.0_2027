@@ -1,60 +1,47 @@
-# Ejecutar y publicar una preview independiente
+# Despliegue continuo del portfolio
 
-## Local
+Destino autorizado: **rubenci04/portfolio_web**, rama **dev**. URL: https://effortless-piroshki-a3c8f9.netlify.app/. Project ID existente: 31f2593b-b266-49c9-8dff-25d5682fd46d.
 
-Requiere Node 22 o compatible con Vite 7; se validó en Node 24.21.0 y Chrome instalado.
+## Configuración
+
+La integración nativa GitHub de Netlify debe tener repo_path=rubenci04/portfolio_web, repo_branch=dev, base vacía (raíz), cmd=npm run build, dir=dist y stop_builds=false. Se reutiliza la instalación GitHub existente, sin webhooks duplicados ni un sitio nuevo.
+
+netlify.toml versiona Node 22, instalación de dependencias de desarrollo necesarias para Vite, comando y carpeta. package-lock.json fija las resoluciones; npm ci es el comando local de instalación reproducible. Netlify realiza su instalación antes del build. No se versiona dist.
+
+## Flujo normal
 
 ```powershell
-cd D:\proyectos\portfolio
+git switch dev
+git pull --ff-only origin dev
+git switch -c codex/nombre-del-cambio
 npm ci
-npm run dev
 npm run lint
 npm test -- --workers=2
 npm run build
-npm run preview
+git diff --check
+git add <archivos-revisados>
+git commit -m "Descripción concreta"
+git push -u origin codex/nombre-del-cambio
 ```
 
-`npm run build` genera assets y HTML prerenderizado en `dist`. El resultado incluye index.html, assets, robots.txt y _headers. No necesita Node en el hosting. Las rutas son anclas de una sola página: no requiere redirección SPA; una ruta inexistente debe devolver 404.
+Integrar la rama en dev por PR o fast-forward según las protecciones vigentes. Netlify escucha los cambios en dev y publica automáticamente. Un push de funcionalidad no garantiza un deploy de producción. Consultar Deploy Previews en los checks del PR/Deploys de Netlify si están habilitados; no asumir que lo están solo por tener Git conectado.
 
-## Netlify Drop — sitio nuevo
+En cada producción revisar state=ready, branch=dev, commit_ref igual al SHA esperado, repo/commit_url correctos y manual_deploy=false. Abrir la URL pública, comprobar los 16 proyectos y Android. Comparar meta build-revision con el deploy para descartar una versión antigua servida con HTTP 200.
 
-1. En PowerShell, ejecutar `$env:SITE_ENV='preview'` y `npm run build`.
-2. Abrir [Netlify Drop](https://app.netlify.com/drop), iniciar sesión y elegir la creación de un proyecto nuevo independiente. No usar el área Deploys del sitio antiguo.
-3. Arrastrar la carpeta **D:\proyectos\portfolio\dist** completa, no `src`, ni el repositorio, ni la carpeta padre. El index.html debe quedar en la raíz del despliegue.
-4. Netlify asignará una URL del nuevo proyecto. Abrirla y comprobar imágenes, filtros, navegación móvil y formulario. La entrega real de EmailJS requiere un envío autorizado y confirmar recepción; el mock local no lo acredita.
-5. Comprobar en el HTML `robots=noindex, follow` y en la respuesta `X-Robots-Tag: noindex, follow`. Noindex no es control de acceso: quien tenga la URL puede ver la preview.
-6. Para actualizar esta preview, reconstruir y arrastrar dist al área de despliegues de **ese proyecto nuevo**.
+## Acceso local de CLI
 
-No se ejecutó ninguna publicación. Netlify CLI no fue encontrada en PATH; no se comprobó autenticación ni se instaló. No se modificó el sitio existente.
+La CLI oficial puede ejecutarse con npx netlify-cli@27.14.2. netlify login autoriza en navegador; no pegar tokens en el chat. netlify link --id 31f2593b-b266-49c9-8dff-25d5682fd46d vincula el directorio local y crea .netlify/state.json, excluido de Git. Esto no sustituye la conexión Git real en el sitio.
 
-## Conectar GitHub posteriormente
+## Producción y previews
 
-El propietario autorizó subir esta versión al repositorio nuevo. La rama publicada será `main`. En el proyecto nuevo de Netlify, vincular el repositorio `rubenci04/Portfolio_Ruben_3.0_2027`, seleccionar `main`, raíz del repositorio, comando `npm run build` y directorio `dist`. `netlify.toml` fija Node 22 y preview por defecto. Mantener SITE_ENV=preview durante la revisión. La vinculación habilita despliegues futuros automáticos, por lo que debe hacerse deliberadamente.
+Producción: SITE_ENV=production y SITE_URL=https://effortless-piroshki-a3c8f9.netlify.app, definidos solo en context.production.environment. HTML index, follow, canonical/og:url absolutos y sitemap con la URL real. Previews: SITE_ENV=preview y noindex en HTML/headers. Se permite rastrear robots.txt para leer noindex.
 
-## Dominio definitivo
+Al cambiar el subdominio o elegir dominio propio, actualizar SITE_URL en netlify.toml con el origen HTTPS real y publicar ese cambio mediante dev. Verificar canonical, sitemap y headers de respuesta después del deploy. No se generan URLs ficticias.
 
-Elegir primero el origen HTTPS real. Configurar SITE_ENV=production y SITE_URL con ese origen, sin ruta, query ni fragmento, exclusivamente para el contexto production. Recompilar: se generan canonical, og:url y sitemap reales; se reemplaza noindex por index y se quita el header de exclusión. Deploy previews y branch deploys siguen noindex aunque hereden SITE_URL. No hay un dominio de ejemplo incorporado al build entregado.
+El sitio usa anclas; no requiere una reescritura /* /index.html 200. El HTML principal está prerenderizado en build y se hidrata en cliente, sin Node/SSR en hosting.
 
-En Netlify, cambiar SITE_ENV del contexto production en netlify.toml cuando corresponda; no establecerlo globalmente para todos los contextos. Validar headers y HTML después de publicar y registrar sitemap en Search Console. Al cambiar dominio, decidir redirecciones del antiguo con el propietario.
+## Diagnóstico
 
-Referencia oficial consultada: [Crear despliegues](https://docs.netlify.com/deploy/create-deploys/). Los despliegues manuales suben el resultado ya construido.
+Si falla un deploy, revisar sus logs antes de tocar código. Validar el mismo build localmente; subir la corrección por Git para que Netlify ejecute un nuevo build. No sustituir la prueba de CI/CD por una carga manual de dist. Si una regla de GitHub bloquea dev, usar el PR requerido y respetar aprobaciones.
 
-## Vercel — conexión al repositorio nuevo
-
-1. Crear un proyecto en Vercel e importar `rubenci04/Portfolio_Ruben_3.0_2027`, rama `main`.
-2. Framework Vite, comando `npm run build`, salida `dist`; estos valores están en `vercel.json`. Usar Node 22.
-3. Durante revisión, establecer SITE_ENV=preview. El HTML tendrá noindex. Vercel no consume el archivo _headers: verificar la meta robots en el HTML servido; vercel.json configura los headers de seguridad compatibles.
-4. Cuando se defina el dominio final, establecer SITE_ENV=production y SITE_URL con el origen real **solo en Production** y recompilar. VERCEL_ENV distinto de production fuerza noindex aunque se herede SITE_ENV=production.
-5. Las rutas internas son anclas; no hace falta una reescritura global que convierta cualquier error 404 en una página válida.
-
-## Cloudflare Pages — conexión al repositorio nuevo
-
-1. En Workers & Pages, crear un proyecto Pages desde GitHub y elegir `rubenci04/Portfolio_Ruben_3.0_2027`.
-2. Rama de producción main, raíz del repositorio, comando `npm run build`, salida `dist`, Node 22 mediante NODE_VERSION.
-3. Comenzar con SITE_ENV=preview. Cloudflare Pages consume dist/_headers y la meta robots permanece noindex.
-4. Al elegir el dominio definitivo, cambiar solo producción a SITE_ENV=production y SITE_URL real. Las ramas distintas de main fuerzan preview cuando CF_PAGES=1. Si cambia la rama principal, configurar SITE_PRODUCTION_BRANCH con su nombre real.
-5. Publicar implica crear un despliegue externo: esta sesión prepara la integración, pero no conecta cuentas ni publica automáticamente.
-
-El portfolio se sirve estáticamente en ambos proveedores. La aplicación Python del bar continúa en Render como proyecto independiente: el portfolio solo presenta su trabajo y enlaza al acceso existente.
-
-Fuentes oficiales: [Vite en Vercel](https://vercel.com/docs/frameworks/frontend/vite) y [configuración de builds en Cloudflare Pages](https://developers.cloudflare.com/pages/configuration/build-configuration/).
+Documentación oficial consultada: https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/ y https://open-api.netlify.com/.

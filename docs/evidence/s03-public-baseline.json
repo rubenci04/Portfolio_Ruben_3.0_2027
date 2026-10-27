@@ -1,0 +1,86 @@
+{
+  "url": "https://effortless-piroshki-a3c8f9.netlify.app/",
+  "status": 200,
+  "headers": {
+    "accept-ranges": "bytes",
+    "age": "19662",
+    "cache-control": "public,max-age=0,must-revalidate",
+    "cache-status": "\"Netlify Edge\"; hit; ttl=31516339",
+    "content-encoding": "br",
+    "content-length": "9816",
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Tue, 27 Oct 2026 03:47:39 GMT",
+    "etag": "\"eea8337f47df78ae7dffee5d47bffb27-ssl-df\"",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "server": "Netlify",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "vary": "Accept-Encoding",
+    "x-content-type-options": "nosniff",
+    "x-nf-request-id": "01M5XQH1WQD6JW3A6713K8W8VG",
+    "x-robots-tag": "noindex, follow"
+  },
+  "publicAssets": [
+    "/assets/index-B5lUxmvL.js",
+    "/assets/index-1JPGgQLX.css"
+  ],
+  "localAssets": [
+    "/assets/index-B5lUxmvL.js",
+    "/assets/index-1JPGgQLX.css"
+  ],
+  "dom": {
+    "title": "Rubén Albarracín — Software Developer | Web & Games",
+    "h1": "Las ideasse vuelvenrealidad.",
+    "projects": [
+      {
+        "id": "edu-app",
+        "title": "Edu App Contable"
+      },
+      {
+        "id": "bar-gestion",
+        "title": "Don Enrique · Gestión del bar"
+      },
+      {
+        "id": "reclutador",
+        "title": "Reclutador"
+      },
+      {
+        "id": "bee-alien",
+        "title": "Bee Alien 3D"
+      },
+      {
+        "id": "tucuman-rush",
+        "title": "Tucumán Rush"
+      },
+      {
+        "id": "crochet-match",
+        "title": "Crochet Match"
+      },
+      {
+        "id": "ricota-quiz",
+        "title": "Ricota Quiz"
+      },
+      {
+        "id": "kiosco",
+        "title": "App Ventas y Gestión de Kiosco"
+      },
+      {
+        "id": "esteticars",
+        "title": "Estéticars Monteros"
+      },
+      {
+        "id": "don-enrique",
+        "title": "Bar Don Enrique"
+      },
+      {
+        "id": "portfolio",
+        "title": "Portfolio anterior"
+      },
+      {
+        "id": "traidores-no",
+        "title": "Traidores No"
+      }
+    ],
+    "canvas": 1,
+    "stars": 3
+  }
+}

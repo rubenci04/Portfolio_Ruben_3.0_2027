@@ -1,0 +1,38 @@
+[
+  {
+    "name": "mobile-375",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "featured": 6,
+    "androidCards": 2,
+    "videoCount": 0
+  },
+  {
+    "name": "tablet-768",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "featured": 6,
+    "androidCards": 2,
+    "videoCount": 0
+  },
+  {
+    "name": "desktop-1440",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "featured": 6,
+    "androidCards": 2,
+    "videoCount": 0
+  },
+  {
+    "name": "wide-1920",
+    "errors": [],
+    "overflow": false,
+    "images": true,
+    "featured": 6,
+    "androidCards": 2,
+    "videoCount": 0
+  }
+]

@@ -1,0 +1,10 @@
+.project-dialog { width:min(780px,calc(100% - 28px)); max-height:calc(100dvh - 44px); padding:0; border:1px solid #7596ae66; border-radius:16px; background:#0d1a2c; color:var(--text); }
+.project-dialog::backdrop { background:#020812d9; backdrop-filter:blur(6px); }
+.dialog-content { padding:clamp(20px,4vw,40px); position:relative; }
+.dialog-close { position:absolute;top:12px;right:12px;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--text); }
+.project-dialog h2 { padding-right:28px; margin-bottom:12px; }
+.project-dialog .eyebrow { padding-right:30px; }.project-dialog .project-cover { border-radius:9px; }
+.detail-status { color:var(--accent);font:11px var(--mono);margin:0 0 22px; }
+.detail-description { margin:24px 0; font-size:16px; }
+.project-dialog h3 { font-size:16px;margin-bottom:12px; }.project-dialog ul { padding-left:20px;color:var(--muted);line-height:1.8;font-size:14px; }
+.detail-note { font-size:12px;margin-top:20px; }.detail-actions { display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:25px; }

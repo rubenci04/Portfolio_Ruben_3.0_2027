@@ -1,0 +1,42 @@
+{
+  "base": "http://127.0.0.1:4173/",
+  "results": [
+    {
+      "name": "mobile",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    },
+    {
+      "name": "tablet",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    },
+    {
+      "name": "desktop",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    },
+    {
+      "name": "wide",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    }
+  ],
+  "noJsCatalog": 16
+}

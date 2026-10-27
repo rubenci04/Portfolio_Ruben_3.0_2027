@@ -5,6 +5,11 @@
 [build.environment]
   NODE_VERSION = "22"
   SITE_ENV = "preview"
+  NPM_FLAGS = "--include=dev"
+
+[context.production.environment]
+  SITE_ENV = "production"
+  SITE_URL = "https://effortless-piroshki-a3c8f9.netlify.app"
 
 [context.deploy-preview.environment]
   SITE_ENV = "preview"

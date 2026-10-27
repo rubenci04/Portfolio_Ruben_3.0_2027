@@ -434,3 +434,14 @@
 .availability { font-size:11px!important; margin-top:12px; }
 .filter-bar { flex-wrap:wrap; }
 .project-filters { flex-wrap:wrap; }
+.project-body h4 { font-size:20px;line-height:1.35;margin-bottom:14px;letter-spacing:-.5px; }
+.project-detail-button { display:inline-flex;align-items:center;gap:6px;border:0;padding:0;background:transparent;color:var(--accent);font:inherit;min-height:36px;cursor:pointer; }
+.project-status.functional { color:#b7dfce; }.project-status.functional i { background:#b7dfce; }
+.catalog-section { margin-top:76px;scroll-margin-top:110px; }
+.catalog-title { display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:20px; }
+.catalog-title .catalog-heading { margin:0; }.catalog-title > span { font:9px var(--mono);color:var(--muted); }
+.featured-card .project-body { padding:20px; }.featured-card .project-links { margin-top:5px;padding-top:10px; }.featured-card .project-cover { min-height:0; }.featured-card .cover-title { font-size:23px;top:55px; }
+.featured-card h4 { font-size:18px;margin-bottom:5px; }.featured-card .project-meta { margin-bottom:12px; }
+#catalog-heading:focus { outline:2px solid var(--accent);outline-offset:8px; }
+@media(min-width:700px) { .featured-grid { grid-template-columns:repeat(3,minmax(0,1fr));gap:18px; }.featured-card .cover-title { font-size:clamp(16px,2vw,26px);top:27%; }.featured-card .cover-meta { font-size:6px; }.featured-card .cover-caption { font-size:6px; }.featured-card .project-cover { padding:16px; } }
+@media(max-width:699px) { .featured-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:12px; }.featured-card .project-body { padding:12px; }.featured-card h4 { font-size:13px; }.featured-card .project-meta { font-size:8px; }.featured-card .cover-title { top:30%;left:12px;font-size:14px;letter-spacing:-.4px; }.featured-card .project-cover { padding:10px; }.featured-card .cover-meta { font-size:5px;letter-spacing:0; }.featured-card .cover-meta > span:last-child { font-size:10px; }.featured-card .cover-caption { display:none; }.featured-card .project-detail-button { font-size:11px; }.filter-bar { display:block; }.project-filters { flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:6px 3px 12px;scrollbar-width:thin; }.project-filters button { flex:0 0 auto; }.project-count { display:block;margin-top:10px; } }
