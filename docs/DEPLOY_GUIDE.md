@@ -1,6 +1,6 @@
 # Despliegue continuo del portfolio
 
-Destino autorizado: **rubenci04/portfolio_web**, rama **dev**. URL: https://effortless-piroshki-a3c8f9.netlify.app/. Project ID existente: 31f2593b-b266-49c9-8dff-25d5682fd46d.
+Destino autorizado: **rubenci04/portfolio_web**, rama **dev**. URL: https://portfoliorubenalbarracin.netlify.app/. Project ID existente: 31f2593b-b266-49c9-8dff-25d5682fd46d.
 
 ## Configuración
 
@@ -34,7 +34,7 @@ La CLI oficial puede ejecutarse con npx netlify-cli@27.14.2. netlify login autor
 
 ## Producción y previews
 
-Producción: SITE_ENV=production y SITE_URL=https://effortless-piroshki-a3c8f9.netlify.app, definidos solo en context.production.environment. HTML index, follow, canonical/og:url absolutos y sitemap con la URL real. Previews: SITE_ENV=preview y noindex en HTML/headers. Se permite rastrear robots.txt para leer noindex.
+Producción: SITE_ENV=production y SITE_URL=https://portfoliorubenalbarracin.netlify.app, definidos solo en context.production.environment. HTML index, follow, canonical/og:url absolutos y sitemap con la URL real. Previews: SITE_ENV=preview y noindex en HTML/headers. Se permite rastrear robots.txt para leer noindex.
 
 Al cambiar el subdominio o elegir dominio propio, actualizar SITE_URL en netlify.toml con el origen HTTPS real y publicar ese cambio mediante dev. Verificar canonical, sitemap y headers de respuesta después del deploy. No se generan URLs ficticias.
 

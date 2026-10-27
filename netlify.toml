@@ -9,7 +9,7 @@
 
 [context.production.environment]
   SITE_ENV = "production"
-  SITE_URL = "https://effortless-piroshki-a3c8f9.netlify.app"
+  SITE_URL = "https://portfoliorubenalbarracin.netlify.app"
 
 [context.deploy-preview.environment]
   SITE_ENV = "preview"

@@ -1,0 +1,43 @@
+{
+  "base": "https://effortless-piroshki-a3c8f9.netlify.app/",
+  "expectedCommit": "2d4b230ed87cc0d269d252cb16a5d90a895ddd54",
+  "results": [
+    {
+      "name": "mobile",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    },
+    {
+      "name": "tablet",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    },
+    {
+      "name": "desktop",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    },
+    {
+      "name": "wide",
+      "status": 200,
+      "errors": [],
+      "robots": "index, follow",
+      "catalog": 16,
+      "androidFilter": 2,
+      "dialog": true
+    }
+  ],
+  "noJsCatalog": 16
+}

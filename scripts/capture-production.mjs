@@ -1,0 +1,4 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+const url='https://portfoliorubenalbarracin.netlify.app/';const browser=await chromium.launch({channel:'chrome',headless:true});await fs.mkdir('docs/screenshots/s04',{recursive:true});
+try{for(const [name,width,height] of [['mobile',375,812],['desktop',1440,900]]){const page=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});await page.goto(url,{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:`docs/screenshots/s04/${name}-live-hero.png`});await page.getByRole('group',{name:'Filtrar catálogo'}).getByRole('button',{name:/^Android/}).click();await page.locator('#catalog').screenshot({path:`docs/screenshots/s04/${name}-live-android.png`,style:'.site-header,.skip-link{visibility:hidden!important}'});await page.close();}}finally{await browser.close();}

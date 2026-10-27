@@ -21,7 +21,7 @@ Los tests usan Chrome instalado. No enviar correo real desde pruebas: EmailJS se
 
 Repositorio de producción: https://github.com/rubenci04/portfolio_web
 Rama de producción: **dev**.
-Sitio existente: https://effortless-piroshki-a3c8f9.netlify.app/
+Sitio existente: https://portfoliorubenalbarracin.netlify.app/
 Project ID: 31f2593b-b266-49c9-8dff-25d5682fd46d.
 
 1. Implementar en una rama de funcionalidad creada desde dev actualizado.

@@ -1,0 +1,22 @@
+{
+  "id": "31f2593b-b266-49c9-8dff-25d5682fd46d",
+  "name": "portfoliorubenalbarracin",
+  "url": "https://portfoliorubenalbarracin.netlify.app",
+  "repo": "rubenci04/portfolio_web",
+  "productionBranch": "dev",
+  "buildCommand": "npm run build",
+  "publish": "dist",
+  "base": "",
+  "stopBuilds": false,
+  "skipAutomaticBuilds": null,
+  "skipPrs": null,
+  "deploy": {
+    "id": "6ae02977eee2574ccfde686e",
+    "state": "ready",
+    "sha": "2d4b230ed87cc0d269d252cb16a5d90a895ddd54",
+    "branch": "dev",
+    "context": "production",
+    "manual": false,
+    "publishedAt": "2026-10-27T04:33:11.067Z"
+  }
+}

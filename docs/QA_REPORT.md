@@ -45,3 +45,7 @@ Se corrigieron: selectores de tests que confundían planeta y filtro; restauraci
 Una revisión automática de permisos alcanzó temporalmente el límite de uso e impidió iniciar dos verificaciones finales. Tras continuar la sesión, los comandos se pudieron retomar; no se trató de un rechazo por inseguridad ni de una prueba ejecutada.
 
 Verificación final de dist: 16 tarjetas de catálogo presentes sin JavaScript; 6 destacados y filtros Android/Todos correctos tras hidratación. Capturas regeneradas contra dist, sin errores de consola, imágenes rotas ni overflow en los cuatro tamaños. Los enlaces públicos verificaron 14 respuestas 200; Render del bar agotó 20 segundos en esta consulta (había respondido 200 en S02). Se conserva su URL real y la indicación de acceso privado; el timeout no acredita una caída permanente. Evidencia en evidence/s03-links.json.
+
+## Sprint 004: producción automática
+
+56/56 pruebas aprobadas en una sola ejecución, lint/build/diff-check aprobados. Build local y URL real comprobados en Chrome en los cuatro tamaños. Conexión verificada a portfolio_web/dev y deploy automático 6ae02977eee2574ccfde686e con commit 2d4b230, state ready, manual_deploy=false. La meta build-revision pública prueba que no se sirvió una versión antigua. Detalles en SPRINT_004_CICD.md y evidencia s04.
