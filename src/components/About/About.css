@@ -5,17 +5,28 @@
 }
 .about-portrait {
   position: relative;
-  max-width: 330px;
+  max-width: 280px;
   width: 100%;
   margin-inline: auto;
 }
 .portrait-frame {
   aspect-ratio: 1;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+}
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
   border: var(--outline-large);
   background: #294758;
-  box-shadow: 8px 8px 0 var(--ink);
+  box-shadow: var(--shadow);
+  z-index: -1;
 }
 .portrait-frame img {
   width: 100%;
@@ -23,6 +34,9 @@
   display: block;
   object-fit: contain;
   filter: none;
+  position: relative;
+  transform: translateY(-5%) scale(1.08);
+  clip-path: inset(0 0 8% 0 round 0 0 12px 12px);
 }
 .about-portrait > span {
   display: block;
