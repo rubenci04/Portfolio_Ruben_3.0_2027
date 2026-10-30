@@ -19,6 +19,24 @@ export const categories = [
 // image and video are optional real assets; null selects an explicitly abstract CSS cover.
 const currentProjects = [
   {
+    id: 'brandkit-studio', title: 'BrandKit Studio', category: 'web',
+    description: 'PWA para crear y organizar identidades de marca: paletas, tipografías, logos, piezas gráficas y exportaciones, con almacenamiento local.',
+    technologies: ['React', 'TypeScript', 'PWA', 'IndexedDB', 'Fabric.js'],
+    status: 'published', statusLabel: 'Publicada · PWA', demoLabel: 'Abrir app',
+    demo: 'https://brandkit-studio.rea-04.workers.dev/',
+    repository: 'https://github.com/rubenci04/BrandKit-Studio',
+    features: ['Gestión de múltiples marcas, colores y tipografías.', 'Estudio gráfico y herramientas de IA local en el navegador.', 'Exportación de manuales de marca, códigos QR y copias de seguridad.'],
+  },
+  {
+    id: 'rio-seco-conecta', title: 'Río Seco Conecta', category: 'web',
+    description: 'PWA informativa e independiente para la comunidad de Río Seco, Tucumán. Reúne colectivos, lugares, servicios, radios y novedades locales. No es una aplicación oficial de la Comuna.',
+    technologies: ['React', 'TypeScript', 'PWA', 'Leaflet', 'Cloudflare Workers', 'D1'],
+    status: 'published', statusLabel: 'Publicada · PWA', demoLabel: 'Abrir app',
+    demo: 'https://rio-seco-conecta.rea-04.workers.dev/',
+    repository: 'https://github.com/rubenci04/R-o-Seco-Conecta',
+    features: ['Consulta de horarios de colectivos y servicios útiles.', 'Mapa de lugares, patrimonio local y radios de la comunidad.', 'Noticias, alertas y agenda con gestión de contenido desde un panel privado.'],
+  },
+  {
     id: "edu-app",
     title: "Edu App Contable",
     category: "web",

@@ -10,7 +10,7 @@ test("renderizado, navegación, accesibilidad estructural y responsive", async (
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "realidad.",
   );
-  await expect(page.locator("#catalog .project-card")).toHaveCount(13);
+  await expect(page.locator("#catalog .project-card")).toHaveCount(15);
   await expect(page.getByRole("link", { name: "Descargar CV" })).toHaveCount(0);
   const integrity = await page.evaluate(() => {
     const ids = [...document.querySelectorAll("[id]")].map(
@@ -50,12 +50,12 @@ test("renderizado, navegación, accesibilidad estructural y responsive", async (
 test("filtros y acciones disponibles", async ({ page }) => {
   await page.goto("/");
   for (const [label, count] of [
-    ["Aplicaciones web", 3],
+    ["Aplicaciones web", 5],
     ["Juegos web", 2],
     ["Godot", 3],
     ["Android", 2],
     ["Sitios web", 3],
-    ["Todos", 13],
+    ["Todos", 15],
   ]) {
     await page.getByRole("group", { name: "Filtrar catálogo" }).getByRole("button", { name: label }).click();
     await expect(page.locator("#catalog .project-card")).toHaveCount(count);

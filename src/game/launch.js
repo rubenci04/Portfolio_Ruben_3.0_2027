@@ -9,7 +9,7 @@ const CSS = `
 @media(max-width:640px){.sg{width:100vw;height:100vh;height:100dvh;border:0;box-shadow:none}}
 .sg *{box-sizing:border-box}
 .sg-bar{display:flex;align-items:center;gap:8px;padding:6px 8px;background:#101b30;border-bottom:3px solid #050b17}
-.sg-stats{flex:1;display:flex;gap:12px;align-items:center;font:700 15px "Space Mono",Consolas,monospace;white-space:nowrap}
+.sg-stats{flex:1;min-width:0;display:flex;gap:8px;align-items:center;font:700 clamp(11px,3.5vw,15px) "Space Mono",Consolas,monospace;white-space:nowrap}
 .sg-lives{color:#ff8fa3;letter-spacing:2px}
 .sg-combo{color:#ffd166}
 .sg-btn{min-height:44px;min-width:44px;padding:6px 12px;border:3px solid #050b17;border-radius:8px;background:#1b2c46;color:#fff6e4;font:800 14px "Segoe UI",Arial,sans-serif;box-shadow:3px 3px 0 #050b17;cursor:pointer}
@@ -24,6 +24,10 @@ const CSS = `
 .sg-over p{margin:0;max-width:280px}
 .sg-over .sg-btn{width:min(260px,100%)}
 .sg-score-big{font:800 44px "Space Mono",Consolas,monospace;color:#ffd166}
+.sg-power-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:300px}
+.sg-power-legend span{padding:6px 8px;border:3px solid #050b17;border-radius:6px;color:#050b17;font-size:12px;box-shadow:2px 2px 0 #050b17}
+.sg-power-legend span:nth-child(1){background:#35e7ff}.sg-power-legend span:nth-child(2){background:#8df58a}.sg-power-legend span:nth-child(3){background:#c18aff}
+@media(max-width:380px){.sg-bar{flex-wrap:wrap;justify-content:flex-end}.sg-bar .sg-btn{padding:6px 8px;font-size:12px}.sg-stats{flex-basis:100%;gap:6px}}
 .sg-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 `;
 
@@ -55,10 +59,11 @@ export function openGame(trigger) {
     <div class="sg-bar">
       <div class="sg-stats"><span class="sg-score" aria-hidden="true">0</span><span class="sg-lives" role="img" aria-label="3 vidas">♥♥♥</span><span class="sg-combo" aria-hidden="true"></span></div>
       <button type="button" class="sg-btn sg-sound" aria-pressed="false" aria-label="Activar sonido">Sonido: no</button>
+      <button type="button" class="sg-btn sg-pause" aria-label="Pausar minijuego" disabled>Ⅱ</button>
       <button type="button" class="sg-btn sg-close" aria-label="Cerrar minijuego">✕</button>
     </div>
     <div class="sg-stage">
-      <canvas role="img" aria-label="Zona de juego: Bee astronauta esquiva asteroides y naves"></canvas>
+      <canvas role="img" tabindex="0" aria-label="Zona de juego: Bee astronauta esquiva asteroides y naves. Flechas o WASD para mover; P para pausar."></canvas>
       <div class="sg-over"></div>
     </div>
     <p class="sg-sr" role="status" aria-live="polite"></p>`;
@@ -72,7 +77,7 @@ export function openGame(trigger) {
     overlay.innerHTML = html; overlay.hidden = false;
     overlay.querySelector(focusSel)?.focus();
   };
-  const menuHtml = `<h2>Bee en el espacio</h2><p>Arrastrá o usá las flechas para moverte. El disparo es automático.</p><p>Récord: <strong>${best}</strong></p><button type="button" class="sg-btn sg-primary" data-a="play">Jugar</button>`;
+  const menuHtml = `<h2>Bee en el espacio</h2><p>Arrastrá o usá las flechas para moverte. El disparo es automático. Esquivá los proyectiles rojos, rosas y naranjas: las naves avisan antes de disparar.</p><div class="sg-power-legend" aria-label="Potenciadores"><span>React · triple</span><span>Godot · escudo</span><span>TS · rápido</span></div><p>Récord: <strong>${best}</strong></p><button type="button" class="sg-btn sg-primary" data-a="play">Jugar</button>`;
   const overHtml = () => `<h2>Game over</h2><div class="sg-score-big">${game.score}</div><p>${game.score >= best && game.score > 0 ? '¡Nuevo récord!' : `Récord: ${best}`}</p><button type="button" class="sg-btn sg-primary" data-a="play">Jugar de nuevo</button><button type="button" class="sg-btn" data-a="share">Compartir</button><button type="button" class="sg-btn" data-a="projects">Ver proyectos</button><p class="sg-share" role="status"></p>`;
 
   const hooks = {
@@ -84,7 +89,10 @@ export function openGame(trigger) {
     },
     say(t) { live.textContent = t; },
     state(s) {
-      if (s === 'play') overlay.hidden = true;
+      $('.sg-pause').disabled = s !== 'play' && s !== 'paused';
+      $('.sg-pause').setAttribute('aria-label', s === 'paused' ? 'Continuar minijuego' : 'Pausar minijuego');
+      $('.sg-pause').textContent = s === 'paused' ? '▶' : 'Ⅱ';
+      if (s === 'play') { overlay.hidden = true; $('canvas').focus({ preventScroll: true }); }
       else if (s === 'paused') showOverlay('<h2>Pausa</h2><button type="button" class="sg-btn sg-primary" data-a="resume">Continuar</button>', '[data-a]');
       else if (s === 'over') {
         if (game.score > best) { best = game.score; writeBest(best); }
@@ -129,6 +137,7 @@ export function openGame(trigger) {
     }
   });
   $('.sg-close').addEventListener('click', close);
+  $('.sg-pause').addEventListener('click', () => { if (game?.state === 'play') game.pause(); else if (game?.state === 'paused') game.resume(); });
   const paintSound = (on) => {
     soundBtn.setAttribute('aria-pressed', String(on));
     soundBtn.setAttribute('aria-label', on ? 'Silenciar sonido' : 'Activar sonido');

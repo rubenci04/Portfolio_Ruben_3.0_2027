@@ -39,25 +39,39 @@ function asteroid(r) {
   };
 }
 
-function badge(label, color, shape) {
+function badge(label, tones, shape) {
   return {
-    w: 36, h: 36,
+    w: 44, h: 44,
     draw(c) {
-      c.fillStyle = '#fff6e4';
-      c.beginPath(); c.arc(0, 0, 16, 0, TAU); c.fill();
-      c.lineWidth = 3; c.strokeStyle = INK; c.stroke();
+      cel(c, k => k.roundRect(-18, -18, 36, 36, 9), tones, [-18,-18,36,36], 3);
+      c.strokeStyle = '#fff6e4'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(-13,-7); c.lineTo(-13,-12); c.lineTo(-8,-12); c.stroke();
       if (shape === 'atom') {
-        c.lineWidth = 2; c.strokeStyle = color;
+        c.lineWidth = 2.2; c.strokeStyle = INK;
         for (let i = 0; i < 3; i++) { c.beginPath(); c.ellipse(0, 0, 11, 4.2, (i * Math.PI) / 3, 0, TAU); c.stroke(); }
-        c.fillStyle = color; c.beginPath(); c.arc(0, 0, 2.6, 0, TAU); c.fill();
+        c.fillStyle = INK; c.beginPath(); c.arc(0, 0, 2.6, 0, TAU); c.fill();
       } else {
-        c.fillStyle = color;
-        c.beginPath(); c.arc(0, 0, 11, 0, TAU); c.fill();
-        c.fillStyle = '#fff'; c.font = '800 12px "Segoe UI",Arial,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.fillStyle = INK; c.font = '900 16px "Segoe UI",Arial,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
         c.fillText(label, 0, 1);
       }
     },
   };
+}
+
+function enemy(shape, tones) {
+  const outlines = {
+    sweeper: [[-21,-9],[-10,-13],[0,-5],[10,-13],[21,-9],[15,10],[5,6],[0,18],[-5,6],[-15,10]],
+    dart: [[0,21],[13,-13],[4,-7],[0,-19],[-4,-7],[-13,-13]],
+    interceptor: [[0,20],[7,5],[24,-12],[14,-17],[0,-6],[-14,-17],[-24,-12],[-7,5]],
+    bomber: [[-24,-11],[-13,-18],[13,-18],[24,-11],[24,14],[12,10],[0,19],[-12,10],[-24,14]],
+  };
+  return { w: 56, h: 52, draw(c) {
+    const hull = k => { outlines[shape].forEach(([x,y],i)=>k[i?'lineTo':'moveTo'](x,y)); k.closePath(); };
+    cel(c, hull, tones, [-24,-18,48,39], 3);
+    cel(c, k=>k.ellipse(0,-2,6,8,0,0,TAU), ['#fff6e4','#ffd166','#e69f2e'], [-6,-10,12,16], 2);
+    c.fillStyle = INK;
+    if (shape === 'bomber') { c.fillRect(-17,8,6,13); c.fillRect(11,8,6,13); }
+    else { c.fillRect(-3,10,6,8); }
+  } };
 }
 
 function planet(r, tones, ring) {
@@ -113,6 +127,10 @@ const DEFS = {
       cel(c, (k) => k.arc(0, -2, 5, 0, TAU), ['#fff0a8', '#ffd166', '#e69f2e'], [-5, -7, 10, 10], 2);
     },
   },
+  sweeper: enemy('sweeper', ['#b8caff','#6879e8','#3b3e8d']),
+  dart: enemy('dart', ['#ffe2aa','#ff9a49','#bd4b35']),
+  interceptor: enemy('interceptor', ['#c0fff2','#37c5ae','#23797d']),
+  bomber: enemy('bomber', ['#dbffad','#83bc4e','#476335']),
   ast0: asteroid(12),
   ast1: asteroid(20),
   ast2: asteroid(30),
@@ -134,9 +152,11 @@ const DEFS = {
     },
   },
   ebullet: { w: 14, h: 14, draw(c) { cel(c, (k) => k.arc(0, 0, 5, 0, TAU), ['#ffd0ec', '#ff5fbf', '#a62f86'], [-5, -5, 10, 10], 2); } },
-  'item-0': badge('', '#1c9fc4', 'atom'),
-  'item-1': badge('G', '#478cbf'),
-  'item-2': badge('TS', '#3178c6'),
+  'enemy-shot': { w: 16, h: 20, draw(c) { cel(c, k=>{k.moveTo(0,8);k.lineTo(5,-3);k.lineTo(0,-8);k.lineTo(-5,-3);k.closePath();}, ['#ffddd0','#ff7967','#b82f53'], [-5,-8,10,16], 2); } },
+  bomb: { w: 18, h: 18, draw(c) { cel(c, k=>k.arc(0,0,6,0,TAU), ['#fff2ba','#ffba52','#be6638'], [-6,-6,12,12], 2);c.fillStyle=INK;c.fillRect(-2,-2,4,4); } },
+  'item-0': badge('', ['#c6fbff','#35e7ff','#239db9'], 'atom'),
+  'item-1': badge('G', ['#ddffbf','#8df58a','#42ae71']),
+  'item-2': badge('TS', ['#f1d5ff','#c18aff','#8658c7']),
   planet0: planet(40, ['#c7a3ff', '#8a63d2', '#57399b'], true),
   planet1: planet(24, ['#ffb48a', '#e0703f', '#9b3f2a'], false),
 };

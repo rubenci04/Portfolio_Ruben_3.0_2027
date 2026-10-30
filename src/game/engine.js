@@ -4,6 +4,8 @@ const H = 640, STEP = 1 / 60, TAU = Math.PI * 2;
 const RADIUS = [12, 20, 30], POINTS = [50, 35, 20];
 const FINGER_OFFSET = 60, SPEED = 330;
 const ITEM_TEXT = ['¡React: disparo triple!', 'Godot: escudo', 'TypeScript: disparo rápido'];
+const ITEM_COLORS = ['#35e7ff', '#8df58a', '#c18aff'];
+const SHIPS = ['scout', 'sweeper', 'dart', 'interceptor', 'bomber'];
 const rand = (a, b) => a + Math.random() * (b - a);
 const mk = (n, extra) => Array.from({ length: n }, () => ({ on: false, ...extra }));
 const take = (pool) => { for (let i = 0; i < pool.length; i++) if (!pool[i].on) { pool[i].on = true; return pool[i]; } return null; };
@@ -51,7 +53,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
 
   function reset() {
     pools.forEach((p) => p.forEach((o) => { o.on = false; })); B.on = false;
-    Object.assign(g, { score: 0, lives: 3, wave: 0, combo: 0, comboT: 0, inv: 0, shield: 0, triple: 0, fast: 0, fireT: 0, shake: 0, time: 0, say: 500 });
+    Object.assign(g, { score: 0, lives: 3, wave: 0, combo: 0, comboT: 0, inv: 0, shield: 0, triple: 0, fast: 0, fireT: 0, waveDelay: 0, shake: 0, time: 0, say: 500 });
     P.x = P.tx = W / 2; P.y = P.ty = H - 130;
     dirty = true;
   }
@@ -59,7 +61,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
   function startWave(n) {
     g.wave = n;
     g.left.ast = Math.min(4 + n * 2, 24);
-    g.left.sc = n < 2 ? 0 : Math.min(n, 9);
+    g.left.sc = Math.min(n + 1, 9);
     if (n % 5 === 0) {
       g.left.ast = 5; g.left.sc = 0;
       B.on = true; B.lvl = n / 5; B.max = B.hp = 28 + 16 * B.lvl; B.x = W / 2; B.y = -80; B.t = 0; B.a = 1.5; B.b = 3;
@@ -140,7 +142,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
 
   function hurtScout(s) {
     if (--s.hp > 0) { audio.play('pop'); return; }
-    addScore(100); boom(s.x, s.y, '#e5486b', 10); audio.play('boom'); drop(s.x, s.y, 0.3); s.on = false;
+    addScore(s.kind === 4 ? 180 : s.kind === 3 ? 150 : 100); boom(s.x, s.y, '#e5486b', 10); audio.play('boom'); drop(s.x, s.y, 0.4); s.on = false;
   }
 
   function damage() {
@@ -152,9 +154,9 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
     return true;
   }
 
-  function shoot(x, y, vx, vy, pool) {
+  function shoot(x, y, vx, vy, pool, kind = 0) {
     const b = take(pool); if (!b) return;
-    b.x = x; b.y = y; b.vx = vx; b.vy = vy;
+    b.x = x; b.y = y; b.vx = vx; b.vy = vy; b.kind = kind;
   }
 
   function spawnAst() {
@@ -167,8 +169,9 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
 
   function spawnScout() {
     const s = take(sc); if (!s) return;
-    s.kind = Math.floor(rand(0, 3)); s.x = s.x0 = rand(50, W - 50); s.y = -30; s.t = 0;
-    s.hp = g.wave >= 5 ? 3 : 2; s.fire = rand(0.8, 1.6); s.dir = Math.random() < 0.5 ? -1 : 1;
+    s.kind = Math.floor(rand(0, SHIPS.length)); s.x = s.x0 = rand(50, W - 50); s.y = -30; s.t = 0;
+    s.hp = (s.kind === 4 ? 4 : s.kind === 2 ? 1 : 2) + (g.wave >= 5 ? 1 : 0);
+    s.fire = rand(1.2, 1.8); s.dir = Math.random() < 0.5 ? -1 : 1;
     g.left.sc--;
   }
 
@@ -252,7 +255,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
       if (B.on && b.on && hit(b.x, b.y, 4, B.x, B.y, 40)) { b.on = false; hurtBoss(); }
       for (let j = 0; j < sc.length && b.on; j++) {
         const s = sc[j];
-        if (s.on && hit(b.x, b.y, 4, s.x, s.y, 15)) { b.on = false; hurtScout(s); }
+        if (s.on && hit(b.x, b.y, 4, s.x, s.y, s.kind === 4 ? 21 : 15)) { b.on = false; hurtScout(s); }
       }
     }
 
@@ -272,21 +275,29 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
         if (s.y < 90) s.y += 90 * dt; else s.x += s.dir * 110 * dt;
         if (s.x < 30 || s.x > W - 30) s.dir = -s.dir;
         if (s.t > 7) s.y += 120 * dt;
-      } else { s.y += 130 * sp() * dt; s.x += Math.sin(s.t * 3) * 20 * dt; }
+      } else if (s.kind === 2) { s.y += 115 * sp() * dt; s.x = s.x0 + Math.sin(s.t * 3) * 25; }
+      else if (s.kind === 3) { s.y += 82 * sp() * dt; s.x = s.x0 + s.dir * Math.sin(s.t * 1.8) * 70; }
+      else { s.y += 44 * sp() * dt; s.x = s.x0 + Math.sin(s.t * 1.2) * 35; }
+      s.x = clamp(s.x, 27, W - 27);
       if (s.y > H + 30) { s.on = false; continue; }
       if ((s.fire -= dt) <= 0 && s.y > 10 && s.y < H - 200) {
-        s.fire = rand(1.6, 2.4) / sp();
-        shoot(s.x, s.y + 14, 0, 190, eb);
-        if (g.wave >= 4 && s.kind === 1) { shoot(s.x, s.y + 14, -70, 180, eb); shoot(s.x, s.y + 14, 70, 180, eb); }
+        s.fire = rand(2, 2.8) / Math.min(sp(), 1.6);
+        if (s.kind === 3) {
+          // Aim once at firing time: the shot never follows the player afterwards.
+          const angle = Math.atan2(Math.max(80, P.y - s.y), P.x - s.x);
+          shoot(s.x, s.y + 18, Math.cos(angle) * 175, Math.sin(angle) * 175, eb, 1);
+        } else if (s.kind === 4 || (g.wave >= 4 && s.kind === 1)) {
+          for (const vx of [-65, 0, 65]) shoot(s.x, s.y + 20, vx, 145, eb, 2);
+        } else shoot(s.x, s.y + 16, 0, 175, eb, 1);
       }
-      if (hit(P.x, P.y, 9, s.x, s.y, 13)) { if (damage()) hurtScout(s); }
+      if (hit(P.x, P.y, 9, s.x, s.y, s.kind === 4 ? 21 : 13)) { if (damage()) hurtScout(s); }
     }
 
     if (B.on) updateBoss(dt);
     for (let i = 0; i < eb.length; i++) {
       const b = eb[i]; if (!b.on) continue;
       b.x += b.vx * dt; b.y += b.vy * dt;
-      if (b.y > H + 10 || b.x < -10 || b.x > W + 10) { b.on = false; continue; }
+      if (b.y > H + 10 || b.y < -20 || b.x < -10 || b.x > W + 10) { b.on = false; continue; }
       if (hit(P.x, P.y, 7, b.x, b.y, 5)) { b.on = false; damage(); }
     }
 
@@ -298,6 +309,7 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
         o.on = false; audio.play('item');
         if (o.type === 0) g.triple = 8; else if (o.type === 1) g.shield = 10; else g.fast = 8;
         text(o.x, o.y - 20, ITEM_TEXT[o.type]); hooks.say(ITEM_TEXT[o.type]);
+        boom(P.x, P.y, ITEM_COLORS[o.type], 14);
       }
     }
 
@@ -334,15 +346,26 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
     if (g.state === 'menu') { spr.draw(c, 'bee', W / 2, H * 0.55 + Math.sin(performance.now() / 500) * (reduced ? 0 : 6)); return; }
 
     for (let i = 0; i < ast.length; i++) { const a = ast[i]; if (a.on) spr.draw(c, `ast${a.size}`, a.x, a.y, a.rot); }
-    for (let i = 0; i < sc.length; i++) { const s = sc[i]; if (s.on) spr.draw(c, 'scout', s.x, s.y); }
+    for (let i = 0; i < sc.length; i++) {
+      const s = sc[i]; if (!s.on) continue;
+      spr.draw(c, SHIPS[s.kind], s.x, s.y);
+      if (s.fire < .4 && s.y > 10 && s.y < H - 200) {
+        c.lineWidth = 2; c.strokeStyle = '#ffac73'; c.beginPath(); c.arc(s.x, s.y + 19, 7, 0, TAU); c.stroke();
+      }
+    }
     if (B.on) {
       spr.draw(c, 'boss', B.x, B.y);
       c.fillStyle = '#050b17'; c.fillRect(W / 2 - 62, 66, 124, 10);
       c.fillStyle = '#ff5fbf'; c.fillRect(W / 2 - 60, 68, 120 * (B.hp / B.max), 6);
     }
-    for (let i = 0; i < it.length; i++) { const o = it[i]; if (o.on) spr.draw(c, `item-${o.type}`, o.x, o.y); }
+    for (let i = 0; i < it.length; i++) {
+      const o = it[i]; if (!o.on) continue;
+      c.strokeStyle = ITEM_COLORS[o.type]; c.lineWidth = 2;
+      c.beginPath(); c.arc(o.x, o.y, reduced ? 23 : 23 + Math.sin(g.time * 4) * 2, 0, TAU); c.stroke();
+      spr.draw(c, `item-${o.type}`, o.x, o.y);
+    }
     for (let i = 0; i < pb.length; i++) { const b = pb[i]; if (b.on) spr.draw(c, 'bullet', b.x, b.y, b.vx * 0.0008); }
-    for (let i = 0; i < eb.length; i++) { const b = eb[i]; if (b.on) spr.draw(c, 'ebullet', b.x, b.y); }
+    for (let i = 0; i < eb.length; i++) { const b = eb[i]; if (b.on) spr.draw(c, b.kind === 2 ? 'bomb' : b.kind === 1 ? 'enemy-shot' : 'ebullet', b.x, b.y); }
     for (let i = 0; i < pt.length; i++) { const p = pt[i]; if (p.on) { c.fillStyle = p.col; c.fillRect(p.x, p.y, p.s, p.s); } }
 
     if (g.state !== 'over') {
@@ -355,11 +378,21 @@ export function createGame({ canvas, stage, root, reduced, audio, hooks }) {
       }
       if (g.shield > 0) {
         c.lineWidth = 6; c.strokeStyle = '#050b17'; c.beginPath(); c.arc(P.x, P.y, 34, 0, TAU); c.stroke();
-        c.lineWidth = 3; c.strokeStyle = g.shield < 2 && Math.floor(g.shield * 6) % 2 ? '#fff6e4' : '#7ee7ff'; c.stroke();
+        c.lineWidth = 3; c.strokeStyle = !reduced && g.shield < 2 && Math.floor(g.shield * 6) % 2 ? '#fff6e4' : ITEM_COLORS[1]; c.stroke();
       }
     }
     for (let i = 0; i < tx.length; i++) { const t = tx[i]; if (t.on) outlined(t.s, t.x, t.y, 15); }
     if (g.banner > 0 && g.state === 'play') outlined(g.bannerText, W / 2, H * 0.3, 28);
+    const effects = [[g.triple, 'TRIPLE', ITEM_COLORS[0]], [g.shield, 'ESCUDO', ITEM_COLORS[1]], [g.fast, 'RÁPIDO', ITEM_COLORS[2]]];
+    let slot = 0;
+    for (const [remaining, label, color] of effects) {
+      if (remaining <= 0) continue;
+      const x = 8 + slot++ * 96;
+      c.fillStyle = '#050b17'; c.fillRect(x, H - 29, 91, 23);
+      c.fillStyle = color; c.fillRect(x + 2, H - 27, 87, 19);
+      c.fillStyle = '#050b17'; c.font = '800 10px "Segoe UI",Arial,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillText(`${label} ${Math.ceil(remaining)}s`, x + 45, H - 17);
+    }
   }
 
   function frame(t) {
